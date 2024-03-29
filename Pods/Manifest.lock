@@ -1,0 +1,51 @@
+PODS:
+  - AppAuth (1.7.2):
+    - AppAuth/Core (= 1.7.2)
+    - AppAuth/ExternalUserAgent (= 1.7.2)
+  - AppAuth/Core (1.7.2)
+  - AppAuth/ExternalUserAgent (1.7.2):
+    - AppAuth/Core
+  - GoogleMaps (7.4.0):
+    - GoogleMaps/Maps (= 7.4.0)
+  - GoogleMaps/Base (7.4.0)
+  - GoogleMaps/Maps (7.4.0):
+    - GoogleMaps/Base
+  - GooglePlaces (7.4.0)
+  - GoogleSignIn (7.0.0):
+    - AppAuth (~> 1.5)
+    - GTMAppAuth (< 3.0, >= 1.3)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.1)
+  - GTMAppAuth (2.0.0):
+    - AppAuth/Core (~> 1.6)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.5)
+  - GTMSessionFetcher/Core (3.3.1)
+  - NavigationDrawer (1.0.3)
+
+DEPENDENCIES:
+  - GoogleMaps
+  - GooglePlaces
+  - GoogleSignIn
+  - NavigationDrawer
+
+SPEC REPOS:
+  trunk:
+    - AppAuth
+    - GoogleMaps
+    - GooglePlaces
+    - GoogleSignIn
+    - GTMAppAuth
+    - GTMSessionFetcher
+    - NavigationDrawer
+
+SPEC CHECKSUMS:
+  AppAuth: ca2458caccec349cc1e26d8d9e8fd7d22f1d01f3
+  GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
+  GooglePlaces: 544e908d94860bf6f8fc1865b80d2c7eb6b5f937
+  GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
+  GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
+  GTMSessionFetcher: 8a1b34ad97ebe6f909fb8b9b77fba99943007556
+  NavigationDrawer: ad87622628ed59589f8fe8e2338d27109ca51a64
+
+PODFILE CHECKSUM: 40bef7996dd1efdf9fae52733ebc74c6fcfbd884
+
+COCOAPODS: 1.12.1
