@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     
     var isDrawerShowing = false
-    var drawerMenuList = ["SMS, Mail, Call", "Share", "Animation", "Custom Drawer"]
+    var drawerMenuList = ["SMS, Mail, Call", "Share", "Animation", "Custom Drawer", "Audio Player"]
 
     @IBOutlet weak var currentLocation: UIImageView!
     @IBOutlet weak var searchRouteButton: UIImageView!
@@ -471,6 +471,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 3 {
             let vc = storyboard?.instantiateViewController(withIdentifier: "CustomViewController") as! CustomViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 4 {
+            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "AudioListViewController") as! AudioListViewController
             navigationController?.pushViewController(vc, animated: true)
         }
     }

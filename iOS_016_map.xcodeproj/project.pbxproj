@@ -15,6 +15,12 @@
 		BD7CC65E2BB68B2B000357A6 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC65D2BB68B2B000357A6 /* CustomViewController.swift */; };
 		BD7CC6612BB68B78000357A6 /* SlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC65F2BB68B78000357A6 /* SlidingViewController.swift */; };
 		BD7CC6622BB68B78000357A6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC6602BB68B78000357A6 /* HomeViewController.swift */; };
+		BD7CC6652BB6A3DF000357A6 /* audio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7CC6642BB6A3DF000357A6 /* audio.storyboard */; };
+		BD7CC6672BB6A5F6000357A6 /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC6662BB6A5F6000357A6 /* AudioViewController.swift */; };
+		BD7CC66A2BB6A78B000357A6 /* audio_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BD7CC6682BB6A78B000357A6 /* audio_1.mp3 */; };
+		BD7CC66B2BB6A78B000357A6 /* audio_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BD7CC6692BB6A78B000357A6 /* audio_2.mp3 */; };
+		BD7CC66D2BB6C6AE000357A6 /* AudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC66C2BB6C6AE000357A6 /* AudioListViewController.swift */; };
+		BD7CC66F2BB6C732000357A6 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC66E2BB6C732000357A6 /* CustomTableViewCell.swift */; };
 		BD86BF392BA45ACE00DA6EB4 /* SendEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD86BF382BA45ACE00DA6EB4 /* SendEmailViewController.swift */; };
 		BD86BF3B2BA476BD00DA6EB4 /* GoogleSignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD86BF3A2BA476BD00DA6EB4 /* GoogleSignViewController.swift */; };
 		BD88EE4C2BA48A780036C493 /* SetRootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD88EE4B2BA48A780036C493 /* SetRootVC.swift */; };
@@ -62,6 +68,12 @@
 		BD7CC65D2BB68B2B000357A6 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		BD7CC65F2BB68B78000357A6 /* SlidingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingViewController.swift; sourceTree = "<group>"; };
 		BD7CC6602BB68B78000357A6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		BD7CC6642BB6A3DF000357A6 /* audio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = audio.storyboard; sourceTree = "<group>"; };
+		BD7CC6662BB6A5F6000357A6 /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
+		BD7CC6682BB6A78B000357A6 /* audio_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audio_1.mp3; sourceTree = "<group>"; };
+		BD7CC6692BB6A78B000357A6 /* audio_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audio_2.mp3; sourceTree = "<group>"; };
+		BD7CC66C2BB6C6AE000357A6 /* AudioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewController.swift; sourceTree = "<group>"; };
+		BD7CC66E2BB6C732000357A6 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		BD86BF382BA45ACE00DA6EB4 /* SendEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmailViewController.swift; sourceTree = "<group>"; };
 		BD86BF3A2BA476BD00DA6EB4 /* GoogleSignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignViewController.swift; sourceTree = "<group>"; };
 		BD88EE4B2BA48A780036C493 /* SetRootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRootVC.swift; sourceTree = "<group>"; };
@@ -137,6 +149,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BD7CC6632BB6A3BA000357A6 /* Audio Player */ = {
+			isa = PBXGroup;
+			children = (
+				BD7CC6642BB6A3DF000357A6 /* audio.storyboard */,
+				BD7CC6662BB6A5F6000357A6 /* AudioViewController.swift */,
+				BD7CC66C2BB6C6AE000357A6 /* AudioListViewController.swift */,
+				BD7CC66E2BB6C732000357A6 /* CustomTableViewCell.swift */,
+			);
+			path = "Audio Player";
+			sourceTree = "<group>";
+		};
 		BDA7B3202BA061B100277672 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +185,9 @@
 		BDA7B32B2BA061B100277672 /* iOS_016_map */ = {
 			isa = PBXGroup;
 			children = (
+				BD7CC6682BB6A78B000357A6 /* audio_1.mp3 */,
+				BD7CC6692BB6A78B000357A6 /* audio_2.mp3 */,
+				BD7CC6632BB6A3BA000357A6 /* Audio Player */,
 				BD2F972E2BA98A9B002E8E69 /* iOS_016_map.entitlements */,
 				BD86BF3A2BA476BD00DA6EB4 /* GoogleSignViewController.swift */,
 				BDA7B3302BA061B100277672 /* ViewController.swift */,
@@ -313,8 +339,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD7CC66A2BB6A78B000357A6 /* audio_1.mp3 in Resources */,
 				BDA7B3392BA061B200277672 /* LaunchScreen.storyboard in Resources */,
+				BD7CC6652BB6A3DF000357A6 /* audio.storyboard in Resources */,
 				BDA7B3362BA061B200277672 /* Assets.xcassets in Resources */,
+				BD7CC66B2BB6A78B000357A6 /* audio_2.mp3 in Resources */,
 				BDA7B3342BA061B100277672 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,15 +511,18 @@
 				BD86BF3B2BA476BD00DA6EB4 /* GoogleSignViewController.swift in Sources */,
 				BDD8C1182BAC38D800E807B1 /* AnimationViewController.swift in Sources */,
 				BD7CC65E2BB68B2B000357A6 /* CustomViewController.swift in Sources */,
+				BD7CC66D2BB6C6AE000357A6 /* AudioListViewController.swift in Sources */,
 				BD7CC6622BB68B78000357A6 /* HomeViewController.swift in Sources */,
 				BD1625122BA4501E00C59333 /* SendSMSViewController.swift in Sources */,
 				BD1625102BA44F1800C59333 /* SMSViewController.swift in Sources */,
+				BD7CC66F2BB6C732000357A6 /* CustomTableViewCell.swift in Sources */,
 				BDA7B3312BA061B100277672 /* ViewController.swift in Sources */,
 				BD93E7A52BAA9F68009C2575 /* GradientButton.swift in Sources */,
 				BD5D8B422BA99A42007559ED /* ShareDataViewController.swift in Sources */,
 				BD86BF392BA45ACE00DA6EB4 /* SendEmailViewController.swift in Sources */,
 				BDA7B32D2BA061B100277672 /* AppDelegate.swift in Sources */,
 				BDA7B32F2BA061B100277672 /* SceneDelegate.swift in Sources */,
+				BD7CC6672BB6A5F6000357A6 /* AudioViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,7 +713,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -715,7 +747,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
