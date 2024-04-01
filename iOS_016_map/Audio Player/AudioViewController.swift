@@ -10,7 +10,7 @@ import AVFoundation
 
 let audioPlayerStoryboard = UIStoryboard(name: "audio", bundle: nil)
 
-class AudioViewController: UIViewController {
+class AudioViewController: UIViewController, AVAudioPlayerDelegate {
     
     var avPlayer: AVAudioPlayer!
     var timer: Timer!
@@ -51,6 +51,7 @@ class AudioViewController: UIViewController {
         audioLabel.text = filePath.lastPathComponent
         
         avPlayer = try? AVAudioPlayer(contentsOf: filePath!)
+        avPlayer.delegate = self
         avPlayer?.play()
         avPlayer.volume = sliderView.value
         
@@ -77,11 +78,6 @@ class AudioViewController: UIViewController {
         sliderView.value = Float(avPlayer.currentTime)
         
         currentTimeLabel.text = String(format: "%0.2d:%0.2d", m, s)
-        
-        if avPlayer.currentTime == avPlayer.duration {
-            timer.invalidate()
-            print("finish")
-        }
     }
     
     func secondsToHoursMinutesSeconds(_ seconds: Int) -> (Int, Int, Int) {
@@ -119,6 +115,8 @@ class AudioViewController: UIViewController {
     }
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
+        isPlaying = true
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         if index < audioFilesList.count - 1 {
             index += 1
             setAudioControls()
@@ -129,6 +127,8 @@ class AudioViewController: UIViewController {
     }
     
     @IBAction func previousButtonTapped(_ sender: UIButton) {
+        isPlaying = true
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         if index > 0 {
             index -= 1
             setAudioControls()
@@ -151,5 +151,12 @@ class AudioViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         avPlayer.pause()
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        print("finished")
+        timer.invalidate()
+        avPlayer.currentTime = 0
+        setAudioControls()
     }
 }

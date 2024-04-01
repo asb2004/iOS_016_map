@@ -18,18 +18,9 @@ class AudioListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let filePath = Bundle.main.paths(forResourcesOfType: "mp3", inDirectory: nil)
-        
-        for path in filePath {
-            audioFilesList.append(URL(string: path)!)
-        }
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAudioFile))
-        
-        documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
-        loadFiles()
     }
+    
     
     func loadFiles() {
         let files = try? FileManager.default.contentsOfDirectory(atPath: documentPath.path)
@@ -52,9 +43,22 @@ class AudioListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        audioFilesList.removeAll()
+        
         navigationController?.isNavigationBarHidden = false
         title = "Music"
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let filePath = Bundle.main.paths(forResourcesOfType: "mp3", inDirectory: nil)
+        
+        for path in filePath {
+            audioFilesList.append(URL(string: path)!)
+        }
+        
+        documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        loadFiles()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
