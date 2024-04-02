@@ -8,24 +8,40 @@
 import UIKit
 import NavigationDrawer
 
+protocol SlidingViewButtonsTapped {
+    func firstButtonTapped()
+    func secondButtonTapped()
+    func signOutButtonTapped()
+}
+
 class SlidingViewController: UIViewController {
     
+    @IBOutlet weak var imageView: UIImageView!
+    
     var interactor:Interactor? = nil
+    var delegate: SlidingViewButtonsTapped?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-
-    @IBAction func homeButton(_ sender: UIButton) {
-//        let vc = storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-//        vc.modalPresentationStyle  = .fullScreen
-//        dismiss(animated: true, completion: nil)
-//        present(vc, animated: true, completion: nil)
-        
+    
+    @IBAction func firstButtonTapped(_ sender: Any) {
+        delegate?.firstButtonTapped()
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func closeButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func secondButtonTapped(_ sender: UIButton) {
+        delegate?.secondButtonTapped()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func signOutButtonTapped(_ sender: UIButton) {
+        delegate?.signOutButtonTapped()
         dismiss(animated: true, completion: nil)
     }
     

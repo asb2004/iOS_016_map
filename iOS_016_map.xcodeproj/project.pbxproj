@@ -17,7 +17,6 @@
 		BD5D8B422BA99A42007559ED /* ShareDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D8B412BA99A42007559ED /* ShareDataViewController.swift */; };
 		BD7CC65E2BB68B2B000357A6 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC65D2BB68B2B000357A6 /* CustomViewController.swift */; };
 		BD7CC6612BB68B78000357A6 /* SlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC65F2BB68B78000357A6 /* SlidingViewController.swift */; };
-		BD7CC6622BB68B78000357A6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC6602BB68B78000357A6 /* HomeViewController.swift */; };
 		BD7CC6652BB6A3DF000357A6 /* audio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7CC6642BB6A3DF000357A6 /* audio.storyboard */; };
 		BD7CC6672BB6A5F6000357A6 /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC6662BB6A5F6000357A6 /* AudioViewController.swift */; };
 		BD7CC66A2BB6A78B000357A6 /* audio_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BD7CC6682BB6A78B000357A6 /* audio_1.mp3 */; };
@@ -41,6 +40,8 @@
 		BDA7B34E2BA061B200277672 /* iOS_016_mapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7B34D2BA061B200277672 /* iOS_016_mapUITests.swift */; };
 		BDA7B3502BA061B200277672 /* iOS_016_mapUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7B34F2BA061B200277672 /* iOS_016_mapUITestsLaunchTests.swift */; };
 		BDD8C1182BAC38D800E807B1 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD8C1172BAC38D800E807B1 /* AnimationViewController.swift */; };
+		BDDF0B4A2BBC1C73002CEB12 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDF0B492BBC1C73002CEB12 /* FirstViewController.swift */; };
+		BDDF0B4C2BBC1C7F002CEB12 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDF0B4B2BBC1C7F002CEB12 /* SecondViewController.swift */; };
 		C69D46E98B68B465AA218B64 /* Pods_iOS_016_mapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB13E790C2C471CFE754E2C8 /* Pods_iOS_016_mapTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +77,6 @@
 		BD5D8B412BA99A42007559ED /* ShareDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataViewController.swift; sourceTree = "<group>"; };
 		BD7CC65D2BB68B2B000357A6 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		BD7CC65F2BB68B78000357A6 /* SlidingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingViewController.swift; sourceTree = "<group>"; };
-		BD7CC6602BB68B78000357A6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD7CC6642BB6A3DF000357A6 /* audio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = audio.storyboard; sourceTree = "<group>"; };
 		BD7CC6662BB6A5F6000357A6 /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
 		BD7CC6682BB6A78B000357A6 /* audio_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audio_1.mp3; sourceTree = "<group>"; };
@@ -104,6 +104,8 @@
 		BDA7B34D2BA061B200277672 /* iOS_016_mapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_016_mapUITests.swift; sourceTree = "<group>"; };
 		BDA7B34F2BA061B200277672 /* iOS_016_mapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_016_mapUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BDD8C1172BAC38D800E807B1 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
+		BDDF0B492BBC1C73002CEB12 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		BDDF0B4B2BBC1C7F002CEB12 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		C59B686A146DF0E60D868593 /* Pods-iOS_016_mapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_016_mapTests.debug.xcconfig"; path = "Target Support Files/Pods-iOS_016_mapTests/Pods-iOS_016_mapTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB13E790C2C471CFE754E2C8 /* Pods_iOS_016_mapTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_016_mapTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBAFA1E54EDFDA42A5A3BB8B /* Pods-iOS_016_map-iOS_016_mapUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_016_map-iOS_016_mapUITests.debug.xcconfig"; path = "Target Support Files/Pods-iOS_016_map-iOS_016_mapUITests/Pods-iOS_016_map-iOS_016_mapUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -207,24 +209,25 @@
 				BD7CC6692BB6A78B000357A6 /* audio_2.mp3 */,
 				BD7CC6632BB6A3BA000357A6 /* Audio Player */,
 				BD2F972E2BA98A9B002E8E69 /* iOS_016_map.entitlements */,
+				BD88EE4B2BA48A780036C493 /* SetRootVC.swift */,
+				BD93E7A42BAA9F68009C2575 /* GradientButton.swift */,
+				BDA7B3372BA061B200277672 /* LaunchScreen.storyboard */,
+				BDA7B3322BA061B100277672 /* Main.storyboard */,
+				BDA7B32C2BA061B100277672 /* AppDelegate.swift */,
+				BDA7B32E2BA061B100277672 /* SceneDelegate.swift */,
 				BD86BF3A2BA476BD00DA6EB4 /* GoogleSignViewController.swift */,
 				BDA7B3302BA061B100277672 /* ViewController.swift */,
 				BD16250F2BA44F1800C59333 /* SMSViewController.swift */,
 				BD1625112BA4501E00C59333 /* SendSMSViewController.swift */,
 				BD86BF382BA45ACE00DA6EB4 /* SendEmailViewController.swift */,
 				BD5D8B412BA99A42007559ED /* ShareDataViewController.swift */,
-				BDA7B32C2BA061B100277672 /* AppDelegate.swift */,
-				BDA7B32E2BA061B100277672 /* SceneDelegate.swift */,
-				BD7CC6602BB68B78000357A6 /* HomeViewController.swift */,
-				BD7CC65F2BB68B78000357A6 /* SlidingViewController.swift */,
-				BDA7B3322BA061B100277672 /* Main.storyboard */,
-				BD7CC65D2BB68B2B000357A6 /* CustomViewController.swift */,
 				BDD8C1172BAC38D800E807B1 /* AnimationViewController.swift */,
+				BD7CC65D2BB68B2B000357A6 /* CustomViewController.swift */,
+				BD7CC65F2BB68B78000357A6 /* SlidingViewController.swift */,
+				BDDF0B492BBC1C73002CEB12 /* FirstViewController.swift */,
+				BDDF0B4B2BBC1C7F002CEB12 /* SecondViewController.swift */,
 				BDA7B3352BA061B200277672 /* Assets.xcassets */,
-				BDA7B3372BA061B200277672 /* LaunchScreen.storyboard */,
 				BDA7B33A2BA061B200277672 /* Info.plist */,
-				BD88EE4B2BA48A780036C493 /* SetRootVC.swift */,
-				BD93E7A42BAA9F68009C2575 /* GradientButton.swift */,
 			);
 			path = iOS_016_map;
 			sourceTree = "<group>";
@@ -535,7 +538,6 @@
 				BD7CC65E2BB68B2B000357A6 /* CustomViewController.swift in Sources */,
 				BD7CC66D2BB6C6AE000357A6 /* AudioListViewController.swift in Sources */,
 				BD87ED872BBA6C220054723C /* VideoCollectionViewCell.swift in Sources */,
-				BD7CC6622BB68B78000357A6 /* HomeViewController.swift in Sources */,
 				BD1625122BA4501E00C59333 /* SendSMSViewController.swift in Sources */,
 				BD1625102BA44F1800C59333 /* SMSViewController.swift in Sources */,
 				BD7CC66F2BB6C732000357A6 /* CustomTableViewCell.swift in Sources */,
@@ -543,8 +545,10 @@
 				BD93E7A52BAA9F68009C2575 /* GradientButton.swift in Sources */,
 				BD5D8B422BA99A42007559ED /* ShareDataViewController.swift in Sources */,
 				BD86BF392BA45ACE00DA6EB4 /* SendEmailViewController.swift in Sources */,
+				BDDF0B4A2BBC1C73002CEB12 /* FirstViewController.swift in Sources */,
 				BDA7B32D2BA061B100277672 /* AppDelegate.swift in Sources */,
 				BD87ED892BBA6C390054723C /* VideoPlayerViewController.swift in Sources */,
+				BDDF0B4C2BBC1C7F002CEB12 /* SecondViewController.swift in Sources */,
 				BDA7B32F2BA061B100277672 /* SceneDelegate.swift in Sources */,
 				BD7CC6672BB6A5F6000357A6 /* AudioViewController.swift in Sources */,
 			);

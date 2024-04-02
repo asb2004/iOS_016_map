@@ -102,6 +102,11 @@ extension AudioListViewController: UIDocumentPickerDelegate {
         
             let destinationPath = documentPath.appendingPathComponent(url.lastPathComponent)
             
+            if FileManager.default.fileExists(atPath: destinationPath.path) {
+                try? FileManager.default.removeItem(at: destinationPath)
+                audioFilesList.remove(at: audioFilesList.firstIndex(of: destinationPath)!)
+            }
+            
             do {
                 try FileManager.default.copyItem(at: url, to: destinationPath)
                 audioFilesList.append(destinationPath)

@@ -98,6 +98,12 @@ class ViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
     @IBAction func signOutButtonTapped(_ sender: UIButton) {
         GIDSignIn.sharedInstance.signOut()
         Switcher.updateRootVC(status: false)

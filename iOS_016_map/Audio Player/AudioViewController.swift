@@ -7,10 +7,13 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 let audioPlayerStoryboard = UIStoryboard(name: "audio", bundle: nil)
 
 class AudioViewController: UIViewController, AVAudioPlayerDelegate {
+    
+    var volumeView: MPVolumeView?
     
     var avPlayer: AVAudioPlayer!
     var timer: Timer!
@@ -31,10 +34,33 @@ class AudioViewController: UIViewController, AVAudioPlayerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        volumeView = MPVolumeView(frame: CGRect(x: -CGFloat.greatestFiniteMagnitude, y: 0, width: 0, height: 0))
+            
+        if let volumeView = volumeView {
+            view.addSubview(volumeView)
+        }
+        
         imageView.layer.cornerRadius = 10.0
+        
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            self?.updateSliderWithSystemVolume()
+        }
         
         setAudioControls()
         
+        sliderView.addTarget(self, action: #selector(sliderValueChanged(sender: event:)), for: .valueChanged)
+        
+    }
+    
+    func updateSliderWithSystemVolume() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setActive(true)
+            let currentVolume = audioSession.outputVolume
+            volumeSlider.value = currentVolume
+        } catch {
+            print("Error setting active audio session: \(error.localizedDescription)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +79,7 @@ class AudioViewController: UIViewController, AVAudioPlayerDelegate {
         avPlayer = try? AVAudioPlayer(contentsOf: filePath!)
         avPlayer.delegate = self
         avPlayer?.play()
-        avPlayer.volume = sliderView.value
+        avPlayer.volume = 0.5
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timeInterval), userInfo: nil, repeats: true)
         
@@ -71,9 +97,7 @@ class AudioViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @objc func timeInterval() {
-        let (h, m, s) = secondsToHoursMinutesSeconds(Int(avPlayer.currentTime))
-        
-        //print("\(h):\(m):\(s) ---- \(th):\(tm):\(ts)")
+        let (_, m, s) = secondsToHoursMinutesSeconds(Int(avPlayer.currentTime))
         
         sliderView.value = Float(avPlayer.currentTime)
         
@@ -138,13 +162,22 @@ class AudioViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    @IBAction func silderValueChanged(_ sender: UISlider) {
-        avPlayer.currentTime = TimeInterval(sliderView.value)
-        avPlayer.play(atTime: avPlayer.currentTime)
+    @objc func sliderValueChanged(sender: UISlider, event: UIEvent) {
+        if let touchEvent = event.allTouches?.first {
+            if touchEvent.phase == .ended {
+                avPlayer.currentTime = TimeInterval(sliderView.value)
+                if isPlaying {
+                    avPlayer.play(atTime: avPlayer.currentTime)
+                }
+            }
+        }
     }
     
     @IBAction func volumeValueChanged(_ sender: UISlider) {
-        avPlayer.volume = volumeSlider.value
+        //avPlayer.volume = volumeSlider.value
+        let volume = sender.value
+        let volumeViewSlider = volumeView?.subviews.first(where: { $0 is UISlider }) as? UISlider
+            volumeViewSlider?.setValue(volume, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -154,7 +187,6 @@ class AudioViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        print("finished")
         timer.invalidate()
         avPlayer.currentTime = 0
         setAudioControls()

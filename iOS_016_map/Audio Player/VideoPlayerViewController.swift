@@ -7,9 +7,13 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 class VideoPlayerViewController: UIViewController {
+    
+    var volumeView: MPVolumeView?
 
+    @IBOutlet weak var volumeSlider: UISlider!
     @IBOutlet weak var controllerVIew: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var sliderView: UISlider!
@@ -29,6 +33,16 @@ class VideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        volumeView = MPVolumeView(frame: CGRect(x: -CGFloat.greatestFiniteMagnitude, y: 0, width: 0, height: 0))
+            
+        if let volumeView = volumeView {
+            view.addSubview(volumeView)
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            self?.updateSliderWithSystemVolume()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,26 +50,40 @@ class VideoPlayerViewController: UIViewController {
         
         controllerVIew.layer.cornerRadius = 10.0
         videoPlayerLayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(videoPlayerTapped)))
-
-        navigationController?.navigationBar.prefersLargeTitles = false
-        title = videoFilesURL[index].lastPathComponent
         
+        navigationController?.isNavigationBarHidden = true
         setUpVideoControlls()
         
     }
     
+    func updateSliderWithSystemVolume() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setActive(true)
+            let currentVolume = audioSession.outputVolume
+            volumeSlider.value = currentVolume
+        } catch {
+            print("Error setting active audio session: \(error.localizedDescription)")
+        }
+    }
+    
     @objc func videoPlayerTapped() {
-        if isControllerHidden {
-            controllerVIew.isHidden = false
-            isControllerHidden = false
-        } else {
-            controllerVIew.isHidden = true
-            isControllerHidden = true
+        UIView.animate(withDuration: 0.5) {
+            if self.isControllerHidden {
+                self.controllerVIew.isHidden = false
+                self.isControllerHidden = false
+            } else {
+                self.controllerVIew.isHidden = true
+                self.isControllerHidden = true
+            }
         }
     }
     
     func setUpVideoControlls() {
+        sliderView.value = 0.0
         
+        currentTimelabel.text = "00:00"
+
         playVideo()
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timeInterval), userInfo: nil, repeats: true)
         avPlayer.play()
@@ -67,13 +95,13 @@ class VideoPlayerViewController: UIViewController {
             let duration = CMTimeGetSeconds(currentItem.duration)
             
             sliderView.minimumValue = 0.0
-            sliderView.maximumValue = Float(duration)
+            sliderView.maximumValue = Float(duration - 1)
             sliderView.value = 0.0
             
             (th, tm, ts) = secondsToHoursMinutesSeconds(Int(duration))
             totalTimeLabel.text = String(format: "%0.2d:%0.2d", tm, ts)
 
-            let (_, m, s) = secondsToHoursMinutesSeconds(Int(currentTime))
+            let (_, m, s) = secondsToHoursMinutesSeconds(Int(currentTime + 1))
             currentTimelabel.text = String(format: "%0.2d:%0.2d", m, s)
             sliderView.value = Float(currentTime)
         }
@@ -88,8 +116,14 @@ class VideoPlayerViewController: UIViewController {
         avPlayer = AVPlayer(url: videoFilesURL[index])
         playerLayer = AVPlayerLayer(player: avPlayer)
         playerLayer.frame = videoPlayerLayer.bounds
-        playerLayer.videoGravity = .resizeAspect
+        if isFullScreen {
+            playerLayer.videoGravity = .resizeAspectFill
+        } else {
+            playerLayer.videoGravity = .resizeAspect
+        }
         videoPlayerLayer.layer.addSublayer(playerLayer)
+        
+        avPlayer.volume = 0.5
         
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
@@ -101,32 +135,44 @@ class VideoPlayerViewController: UIViewController {
     }
     
     @objc func videoFinished() {
-        print("finished")
+        currentTimelabel.text = "00:00"
+        self.playerLayer.removeFromSuperlayer()
         self.timer.invalidate()
         self.avPlayer.seek(to: .zero)
         self.setUpVideoControlls()
     }
     
     @IBAction func previousButtonTapped(_ sender: UIButton) {
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        isPlaying = true
         playerLayer.removeFromSuperlayer()
         timer.invalidate()
         if index > 0 {
             index -= 1
-            setUpVideoControlls()
         } else {
             index = videoFilesURL.count - 1
-            setUpVideoControlls()
         }
+        setUpVideoControlls()
     }
     
     @IBAction func backwardButtonTapped(_ sender: UIButton) {
-        let currentTime = CMTimeGetSeconds(avPlayer.currentItem!.currentTime())
+        
+        avPlayer.pause()
+        
+        let currentTime = CMTimeGetSeconds(avPlayer.currentTime())
         if currentTime > 10 {
-            avPlayer.seek(to: CMTime(seconds: currentTime - 11, preferredTimescale: 600))
-            avPlayer.play()
+            avPlayer.seek(to: CMTime(seconds: currentTime - 10, preferredTimescale: 1))
+            avPlayer.seek(to: CMTime(seconds: currentTime - 10, preferredTimescale: 1)) { complete in
+                if self.isPlaying {
+                    self.avPlayer.play()
+                }
+            }
         } else {
-            avPlayer.seek(to: .zero)
-            avPlayer.play()
+            avPlayer.seek(to: .zero) { complete in
+                if self.isPlaying {
+                    self.avPlayer.play()
+                }
+            }
         }
     }
     
@@ -143,35 +189,57 @@ class VideoPlayerViewController: UIViewController {
     }
     
     @IBAction func forwardButtonTapped(_ sender: UIButton) {
-        let currentTime = CMTimeGetSeconds(avPlayer.currentItem!.currentTime())
+        
+        avPlayer.pause()
+        
+        let currentTime = CMTimeGetSeconds(avPlayer.currentTime())
         let totalTime = CMTimeGetSeconds(avPlayer.currentItem!.duration)
+        print(currentTime)
         if currentTime < totalTime - 10 {
-            avPlayer.seek(to: CMTime(seconds: currentTime + 9, preferredTimescale: 600))
-            avPlayer.play()
+            avPlayer.seek(to: CMTime(seconds: currentTime.advanced(by: 10.0), preferredTimescale: 1)) { completed in
+                if self.isPlaying {
+                    self.avPlayer.play()
+                }
+            }
         } else {
-            avPlayer.seek(to: CMTime(seconds: totalTime, preferredTimescale: 600))
+            avPlayer.seek(to: CMTime(seconds: currentTime.advanced(by: 10.0), preferredTimescale: 1)) { completed in
+                if self.isPlaying {
+                    self.avPlayer.play()
+                }
+            }
         }
     }
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        isPlaying = true
         playerLayer.removeFromSuperlayer()
         timer.invalidate()
         if index < videoFilesURL.count - 1 {
             index += 1
-            setUpVideoControlls()
         } else {
             index = 0
-            setUpVideoControlls()
         }
+        setUpVideoControlls()
     }
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         avPlayer.seek(to: CMTime(seconds: Double(sliderView.value), preferredTimescale: 60))
-        avPlayer.play()
+        if isPlaying {
+            avPlayer.play()
+        }
+        
+    }
+    
+    @IBAction func sliderValueUpdated(_ sender: Any) {
+        print("slider value : \(sliderView.value)")
     }
     
     @IBAction func volumeSliderChanged(_ sender: UISlider) {
-        avPlayer.volume = sender.value
+        //avPlayer.volume = sender.value
+        let volume = sender.value
+        let volumeViewSlider = volumeView?.subviews.first(where: { $0 is UISlider }) as? UISlider
+            volumeViewSlider?.setValue(volume, animated: false)
     }
     
     @IBAction func fullScreenButtonTapped(_ sender: UIButton) {
@@ -191,12 +259,15 @@ class VideoPlayerViewController: UIViewController {
         
     }
     
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
         avPlayer.pause()
-        
         
     }
     
