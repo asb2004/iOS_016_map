@@ -9,6 +9,8 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import GoogleSignIn
+import FacebookCore
+import FBSDKLoginKit
 
 class ViewController: UIViewController {
     
@@ -19,7 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     
     var isDrawerShowing = false
-    var drawerMenuList = ["SMS, Mail, Call", "Share", "Animation", "Custom Drawer", "Audio Player", "Video Player"]
+    var drawerMenuList = ["SMS, Mail, Call", "Share", "Animation", "Custom Drawer", "Audio Player", "Video Player", "Device Resolution", "Auto Resizing", "Localization", "Action Sheet", "Popover View", "Pull To Refresh", "UI Design"]
 
     @IBOutlet weak var currentLocation: UIImageView!
     @IBOutlet weak var searchRouteButton: UIImageView!
@@ -49,21 +51,14 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         profileImage.layer.cornerRadius = profileImage.frame.height / 2
         
-        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-            if error != nil {
-                return
-            }
-            
-            guard let currentUser = user else { return }
-            self.lblName.text = currentUser.profile?.name
-            self.lblEmail.text = currentUser.profile?.email
-            
-            DispatchQueue.main.async {
-                if let data = try? Data(contentsOf: (currentUser.profile?.imageURL(withDimension: 320))!) {
-                    self.profileImage.image = UIImage(data: data)
-                }
+        if let value = UserDefaults.standard.string(forKey: "loginFrom") {
+            if value == "google" {
+                getDataFromGoogle()
+            } else {
+                getUserDataFromFaceBook()
             }
         }
+        
         
         // Do any additional setup after loading the view.
         title = "Google Map"
@@ -104,8 +99,56 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
+    func getDataFromGoogle() {
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if error != nil {
+                return
+            }
+            
+            guard let currentUser = user else { return }
+            self.lblName.text = currentUser.profile?.name
+            self.lblEmail.text = currentUser.profile?.email
+            
+            DispatchQueue.main.async {
+                if let data = try? Data(contentsOf: (currentUser.profile?.imageURL(withDimension: 320))!) {
+                    self.profileImage.image = UIImage(data: data)
+                }
+            }
+        }
+    }
+    
+    func getUserDataFromFaceBook() {
+        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, picture.width(480).height(480)"]).start { (connection, result, error) in
+              if let error = error {
+                  // Handle API request error here
+                  print("Error: \(error.localizedDescription)")
+              } else if let userData = result as? [String: Any] {
+                  // Access the user data here
+                  let _ = userData["id"] as? String
+                  let name = userData["name"] as? String
+                  let email = userData["email"] as? String
+                  
+                  self.lblName.text = name
+                  self.lblEmail.text = email
+                  
+                  if let imageURL = ((userData["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
+                      let url = URL(string: imageURL)
+                      let data = try? Data(contentsOf: url!)
+                      self.profileImage.image = UIImage(data: data!)
+                  }
+              }
+          }
+    }
+    
     @IBAction func signOutButtonTapped(_ sender: UIButton) {
-        GIDSignIn.sharedInstance.signOut()
+        
+        if let value = UserDefaults.standard.string(forKey: "loginFrom") {
+            if value == "google" {
+                GIDSignIn.sharedInstance.signOut()
+            } else {
+                LoginManager().logOut()
+            }
+        }
         Switcher.updateRootVC(status: false)
     }
 
@@ -483,6 +526,27 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 5 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "VideoListViewController") as! VideoListViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 6 {
+            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "DeviceResolutionViewController") as! DeviceResolutionViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 7 {
+            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "AutoResizingViewController") as! AutoResizingViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 8 {
+            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "ActionSheetViewController") as! ActionSheetViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 9 {
+            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "ActionSheetViewController") as! ActionSheetViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 10 {
+            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "PopoverViewController") as! PopoverViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 11 {
+            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "PullToRefreshViewController") as! PullToRefreshViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 12 {
+            let vc = uiDemoStoryboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
             navigationController?.pushViewController(vc, animated: true)
         }
     }

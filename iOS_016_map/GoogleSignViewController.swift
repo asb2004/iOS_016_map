@@ -8,11 +8,15 @@
 import UIKit
 import GoogleSignIn
 import AuthenticationServices
+import FacebookCore
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class GoogleSignViewController: UIViewController {
 
     @IBOutlet weak var appleButtonView: UIView!
     @IBOutlet weak var googleButtonView: GIDSignInButton!
+    @IBOutlet weak var facebookLoginView: UIView!
     
     var name = ""
     var email = ""
@@ -20,6 +24,12 @@ class GoogleSignViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let fbLoginButton = FBLoginButton()
+        fbLoginButton.frame = facebookLoginView.bounds
+        facebookLoginView.addSubview(fbLoginButton)
+        fbLoginButton.delegate = self
+        fbLoginButton.permissions = ["public_profile", "email"]
 
         googleButtonView.style = .wide
         googleButtonView.frame = appleButtonView.bounds
@@ -42,6 +52,8 @@ class GoogleSignViewController: UIViewController {
             self.email = user.profile?.email ?? ""
             self.name = user.profile?.name ?? ""
             self.profileImageURL = user.profile?.imageURL(withDimension: 320)
+            
+            UserDefaults.standard.set("google", forKey: "loginFrom")
 
             Switcher.updateRootVC(status: true)
         }
@@ -58,22 +70,38 @@ class GoogleSignViewController: UIViewController {
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
-extension GoogleSignViewController: ASAuthorizationControllerDelegate {
+extension GoogleSignViewController: LoginButtonDelegate {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        if let result = result {
+            if result.isCancelled {
+                print("user cancle")
+                return
+            }
+            UserDefaults.standard.set("facebook", forKey: "loginFrom")
+            Switcher.updateRootVC(status: true)
+            //getUserData()
+            
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        print("log out")
+    }
+    
+    
+}
+
+extension GoogleSignViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
+    }
+    
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error)
@@ -82,7 +110,7 @@ extension GoogleSignViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
-            let fullName = credential.fullName
+            let fullName = credential.fullName?.givenName
             let email = credential.email
             
             print("Name : \(String(describing: fullName)) Email : \(String(describing: email))")

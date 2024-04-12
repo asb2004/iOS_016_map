@@ -11,10 +11,24 @@
 		A9860F933896183F21686985 /* Pods_iOS_016_map_iOS_016_mapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5478F3E228CEA2234D278E28 /* Pods_iOS_016_map_iOS_016_mapUITests.framework */; };
 		BD1625102BA44F1800C59333 /* SMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD16250F2BA44F1800C59333 /* SMSViewController.swift */; };
 		BD1625122BA4501E00C59333 /* SendSMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1625112BA4501E00C59333 /* SendSMSViewController.swift */; };
+		BD406CDD2BC55F72007F9383 /* UIDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD406CDC2BC55F72007F9383 /* UIDemo.storyboard */; };
+		BD406CDF2BC55FAF007F9383 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD406CDE2BC55FAF007F9383 /* HomeViewController.swift */; };
 		BD40C6D12BBA8719004C9CA2 /* virtual_reality.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = BD40C6D02BBA8719004C9CA2 /* virtual_reality.mp4 */; };
 		BD40C6D42BBA8FDE004C9CA2 /* new_video.mov in Resources */ = {isa = PBXBuildFile; fileRef = BD40C6D22BBA8FDD004C9CA2 /* new_video.mov */; };
 		BD40C6D52BBA8FDE004C9CA2 /* hd_video.mov in Resources */ = {isa = PBXBuildFile; fileRef = BD40C6D32BBA8FDE004C9CA2 /* hd_video.mov */; };
+		BD472AEB2BBFC76B00358E4C /* ActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD472AEA2BBFC76B00358E4C /* ActionSheetViewController.swift */; };
+		BD472AED2BBFCDDF00358E4C /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD472AEC2BBFCDDF00358E4C /* PopoverViewController.swift */; };
+		BD472AEF2BBFCEED00358E4C /* ShowPopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD472AEE2BBFCEED00358E4C /* ShowPopViewController.swift */; };
+		BD472AF42BBFF95000358E4C /* CreatePopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD472AF22BBFF95000358E4C /* CreatePopoverView.swift */; };
+		BD472AF52BBFF95000358E4C /* CreatePopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD472AF32BBFF95000358E4C /* CreatePopoverView.xib */; };
+		BD472AF72BC01A3800358E4C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD472AF62BC01A3800358E4C /* BottomSheetViewController.swift */; };
+		BD503A742BC654A300CD358E /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD503A732BC654A300CD358E /* TabBarViewController.swift */; };
+		BD503A762BC6583600CD358E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD503A752BC6583600CD358E /* ProfileViewController.swift */; };
+		BD503A782BC6584600CD358E /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD503A772BC6584600CD358E /* ShoppingCartViewController.swift */; };
+		BD503A7A2BC6585000CD358E /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD503A792BC6585000CD358E /* FavouriteViewController.swift */; };
+		BD503A7C2BC66DF900CD358E /* IamgeSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD503A7B2BC66DF900CD358E /* IamgeSliderCell.swift */; };
 		BD5D8B422BA99A42007559ED /* ShareDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D8B412BA99A42007559ED /* ShareDataViewController.swift */; };
+		BD5E90262BBD22AE00772D1A /* AutoResizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5E90252BBD22AE00772D1A /* AutoResizingViewController.swift */; };
 		BD7CC65E2BB68B2B000357A6 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC65D2BB68B2B000357A6 /* CustomViewController.swift */; };
 		BD7CC6612BB68B78000357A6 /* SlidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7CC65F2BB68B78000357A6 /* SlidingViewController.swift */; };
 		BD7CC6652BB6A3DF000357A6 /* audio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7CC6642BB6A3DF000357A6 /* audio.storyboard */; };
@@ -29,7 +43,9 @@
 		BD87ED872BBA6C220054723C /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD87ED862BBA6C220054723C /* VideoCollectionViewCell.swift */; };
 		BD87ED892BBA6C390054723C /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD87ED882BBA6C390054723C /* VideoPlayerViewController.swift */; };
 		BD88EE4C2BA48A780036C493 /* SetRootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD88EE4B2BA48A780036C493 /* SetRootVC.swift */; };
+		BD8C687C2BC9357300DCE5C5 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8C687B2BC9357300DCE5C5 /* CartTableViewCell.swift */; };
 		BD93E7A52BAA9F68009C2575 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD93E7A42BAA9F68009C2575 /* GradientButton.swift */; };
+		BDA61E672BC506AB00AC07F9 /* PullToRefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA61E662BC506AB00AC07F9 /* PullToRefreshViewController.swift */; };
 		BDA7B32D2BA061B100277672 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7B32C2BA061B100277672 /* AppDelegate.swift */; };
 		BDA7B32F2BA061B100277672 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7B32E2BA061B100277672 /* SceneDelegate.swift */; };
 		BDA7B3312BA061B100277672 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7B3302BA061B100277672 /* ViewController.swift */; };
@@ -39,9 +55,16 @@
 		BDA7B3442BA061B200277672 /* iOS_016_mapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7B3432BA061B200277672 /* iOS_016_mapTests.swift */; };
 		BDA7B34E2BA061B200277672 /* iOS_016_mapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7B34D2BA061B200277672 /* iOS_016_mapUITests.swift */; };
 		BDA7B3502BA061B200277672 /* iOS_016_mapUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7B34F2BA061B200277672 /* iOS_016_mapUITestsLaunchTests.swift */; };
+		BDA891B42BC7C7B900400620 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA891B32BC7C7B900400620 /* ProductDetailsViewController.swift */; };
+		BDB26B482BBE90E0007BAE0E /* DeviceResolutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB26B472BBE90E0007BAE0E /* DeviceResolutionViewController.swift */; };
+		BDD16AD42BC906850091C248 /* ProductDetailsBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD16AD32BC906850091C248 /* ProductDetailsBottomSheetViewController.swift */; };
 		BDD8C1182BAC38D800E807B1 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD8C1172BAC38D800E807B1 /* AnimationViewController.swift */; };
 		BDDF0B4A2BBC1C73002CEB12 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDF0B492BBC1C73002CEB12 /* FirstViewController.swift */; };
 		BDDF0B4C2BBC1C7F002CEB12 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDF0B4B2BBC1C7F002CEB12 /* SecondViewController.swift */; };
+		BDE226FE2BC6957F00D1CE7F /* HomeProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE226FD2BC6957F00D1CE7F /* HomeProductViewCell.swift */; };
+		BDE227002BC6A36500D1CE7F /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE226FF2BC6A36500D1CE7F /* ProductListViewController.swift */; };
+		BDE227022BC6BE1800D1CE7F /* CategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE227012BC6BE1800D1CE7F /* CategoryCollectionCell.swift */; };
+		BDE227042BC6C55500D1CE7F /* ProductListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE227032BC6C55500D1CE7F /* ProductListCollectionCell.swift */; };
 		C69D46E98B68B465AA218B64 /* Pods_iOS_016_mapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB13E790C2C471CFE754E2C8 /* Pods_iOS_016_mapTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,10 +94,24 @@
 		BD16250F2BA44F1800C59333 /* SMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSViewController.swift; sourceTree = "<group>"; };
 		BD1625112BA4501E00C59333 /* SendSMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendSMSViewController.swift; sourceTree = "<group>"; };
 		BD2F972E2BA98A9B002E8E69 /* iOS_016_map.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOS_016_map.entitlements; sourceTree = "<group>"; };
+		BD406CDC2BC55F72007F9383 /* UIDemo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UIDemo.storyboard; sourceTree = "<group>"; };
+		BD406CDE2BC55FAF007F9383 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD40C6D02BBA8719004C9CA2 /* virtual_reality.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = virtual_reality.mp4; path = ../../../../Downloads/virtual_reality.mp4; sourceTree = "<group>"; };
 		BD40C6D22BBA8FDD004C9CA2 /* new_video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = new_video.mov; sourceTree = "<group>"; };
 		BD40C6D32BBA8FDE004C9CA2 /* hd_video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = hd_video.mov; sourceTree = "<group>"; };
+		BD472AEA2BBFC76B00358E4C /* ActionSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActionSheetViewController.swift; path = iOS_016_map/ActionSheetViewController.swift; sourceTree = SOURCE_ROOT; };
+		BD472AEC2BBFCDDF00358E4C /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = Pods/PopoverViewController.swift; sourceTree = SOURCE_ROOT; };
+		BD472AEE2BBFCEED00358E4C /* ShowPopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPopViewController.swift; sourceTree = "<group>"; };
+		BD472AF22BBFF95000358E4C /* CreatePopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreatePopoverView.swift; path = Pods/CreatePopoverView.swift; sourceTree = SOURCE_ROOT; };
+		BD472AF32BBFF95000358E4C /* CreatePopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CreatePopoverView.xib; path = Pods/CreatePopoverView.xib; sourceTree = SOURCE_ROOT; };
+		BD472AF62BC01A3800358E4C /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		BD503A732BC654A300CD358E /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		BD503A752BC6583600CD358E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Pods/ProfileViewController.swift; sourceTree = SOURCE_ROOT; };
+		BD503A772BC6584600CD358E /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
+		BD503A792BC6585000CD358E /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
+		BD503A7B2BC66DF900CD358E /* IamgeSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IamgeSliderCell.swift; sourceTree = "<group>"; };
 		BD5D8B412BA99A42007559ED /* ShareDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataViewController.swift; sourceTree = "<group>"; };
+		BD5E90252BBD22AE00772D1A /* AutoResizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoResizingViewController.swift; sourceTree = "<group>"; };
 		BD7CC65D2BB68B2B000357A6 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		BD7CC65F2BB68B78000357A6 /* SlidingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingViewController.swift; sourceTree = "<group>"; };
 		BD7CC6642BB6A3DF000357A6 /* audio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = audio.storyboard; sourceTree = "<group>"; };
@@ -89,7 +126,9 @@
 		BD87ED862BBA6C220054723C /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		BD87ED882BBA6C390054723C /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		BD88EE4B2BA48A780036C493 /* SetRootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRootVC.swift; sourceTree = "<group>"; };
+		BD8C687B2BC9357300DCE5C5 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		BD93E7A42BAA9F68009C2575 /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
+		BDA61E662BC506AB00AC07F9 /* PullToRefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshViewController.swift; sourceTree = "<group>"; };
 		BDA7B3292BA061B100277672 /* iOS_016_map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_016_map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA7B32C2BA061B100277672 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDA7B32E2BA061B100277672 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,9 +142,16 @@
 		BDA7B3492BA061B200277672 /* iOS_016_mapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOS_016_mapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA7B34D2BA061B200277672 /* iOS_016_mapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_016_mapUITests.swift; sourceTree = "<group>"; };
 		BDA7B34F2BA061B200277672 /* iOS_016_mapUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_016_mapUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BDA891B32BC7C7B900400620 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
+		BDB26B472BBE90E0007BAE0E /* DeviceResolutionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceResolutionViewController.swift; sourceTree = "<group>"; };
+		BDD16AD32BC906850091C248 /* ProductDetailsBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductDetailsBottomSheetViewController.swift; path = Pods/ProductDetailsBottomSheetViewController.swift; sourceTree = SOURCE_ROOT; };
 		BDD8C1172BAC38D800E807B1 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		BDDF0B492BBC1C73002CEB12 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		BDDF0B4B2BBC1C7F002CEB12 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		BDE226FD2BC6957F00D1CE7F /* HomeProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProductViewCell.swift; sourceTree = "<group>"; };
+		BDE226FF2BC6A36500D1CE7F /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = SOURCE_ROOT; };
+		BDE227012BC6BE1800D1CE7F /* CategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionCell.swift; sourceTree = "<group>"; };
+		BDE227032BC6C55500D1CE7F /* ProductListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCollectionCell.swift; sourceTree = "<group>"; };
 		C59B686A146DF0E60D868593 /* Pods-iOS_016_mapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_016_mapTests.debug.xcconfig"; path = "Target Support Files/Pods-iOS_016_mapTests/Pods-iOS_016_mapTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB13E790C2C471CFE754E2C8 /* Pods_iOS_016_mapTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_016_mapTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBAFA1E54EDFDA42A5A3BB8B /* Pods-iOS_016_map-iOS_016_mapUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_016_map-iOS_016_mapUITests.debug.xcconfig"; path = "Target Support Files/Pods-iOS_016_map-iOS_016_mapUITests/Pods-iOS_016_map-iOS_016_mapUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -163,9 +209,31 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BD406CDB2BC55F57007F9383 /* UI Design */ = {
+			isa = PBXGroup;
+			children = (
+				BD406CDC2BC55F72007F9383 /* UIDemo.storyboard */,
+				BD503A732BC654A300CD358E /* TabBarViewController.swift */,
+				BD406CDE2BC55FAF007F9383 /* HomeViewController.swift */,
+				BD503A7B2BC66DF900CD358E /* IamgeSliderCell.swift */,
+				BDE226FD2BC6957F00D1CE7F /* HomeProductViewCell.swift */,
+				BD503A752BC6583600CD358E /* ProfileViewController.swift */,
+				BD503A772BC6584600CD358E /* ShoppingCartViewController.swift */,
+				BD8C687B2BC9357300DCE5C5 /* CartTableViewCell.swift */,
+				BD503A792BC6585000CD358E /* FavouriteViewController.swift */,
+				BDE226FF2BC6A36500D1CE7F /* ProductListViewController.swift */,
+				BDE227012BC6BE1800D1CE7F /* CategoryCollectionCell.swift */,
+				BDE227032BC6C55500D1CE7F /* ProductListCollectionCell.swift */,
+				BDA891B32BC7C7B900400620 /* ProductDetailsViewController.swift */,
+				BDD16AD32BC906850091C248 /* ProductDetailsBottomSheetViewController.swift */,
+			);
+			path = "UI Design";
+			sourceTree = "<group>";
+		};
 		BD7CC6632BB6A3BA000357A6 /* Audio Player */ = {
 			isa = PBXGroup;
 			children = (
+				BD472AF32BBFF95000358E4C /* CreatePopoverView.xib */,
 				BD7CC6642BB6A3DF000357A6 /* audio.storyboard */,
 				BD7CC6662BB6A5F6000357A6 /* AudioViewController.swift */,
 				BD7CC66C2BB6C6AE000357A6 /* AudioListViewController.swift */,
@@ -173,6 +241,14 @@
 				BD87ED842BBA6C090054723C /* VideoListViewController.swift */,
 				BD87ED862BBA6C220054723C /* VideoCollectionViewCell.swift */,
 				BD87ED882BBA6C390054723C /* VideoPlayerViewController.swift */,
+				BDB26B472BBE90E0007BAE0E /* DeviceResolutionViewController.swift */,
+				BD5E90252BBD22AE00772D1A /* AutoResizingViewController.swift */,
+				BD472AEC2BBFCDDF00358E4C /* PopoverViewController.swift */,
+				BD472AF22BBFF95000358E4C /* CreatePopoverView.swift */,
+				BD472AEA2BBFC76B00358E4C /* ActionSheetViewController.swift */,
+				BD472AEE2BBFCEED00358E4C /* ShowPopViewController.swift */,
+				BD472AF62BC01A3800358E4C /* BottomSheetViewController.swift */,
+				BDA61E662BC506AB00AC07F9 /* PullToRefreshViewController.swift */,
 			);
 			path = "Audio Player";
 			sourceTree = "<group>";
@@ -202,6 +278,7 @@
 		BDA7B32B2BA061B100277672 /* iOS_016_map */ = {
 			isa = PBXGroup;
 			children = (
+				BD406CDB2BC55F57007F9383 /* UI Design */,
 				BD7CC6682BB6A78B000357A6 /* audio_1.mp3 */,
 				BD40C6D02BBA8719004C9CA2 /* virtual_reality.mp4 */,
 				BD40C6D32BBA8FDE004C9CA2 /* hd_video.mov */,
@@ -360,10 +437,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD472AF52BBFF95000358E4C /* CreatePopoverView.xib in Resources */,
 				BD7CC66A2BB6A78B000357A6 /* audio_1.mp3 in Resources */,
 				BDA7B3392BA061B200277672 /* LaunchScreen.storyboard in Resources */,
 				BD40C6D12BBA8719004C9CA2 /* virtual_reality.mp4 in Resources */,
 				BD7CC6652BB6A3DF000357A6 /* audio.storyboard in Resources */,
+				BD406CDD2BC55F72007F9383 /* UIDemo.storyboard in Resources */,
 				BDA7B3362BA061B200277672 /* Assets.xcassets in Resources */,
 				BD40C6D42BBA8FDE004C9CA2 /* new_video.mov in Resources */,
 				BD7CC66B2BB6A78B000357A6 /* audio_2.mp3 in Resources */,
@@ -530,27 +609,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD472AEB2BBFC76B00358E4C /* ActionSheetViewController.swift in Sources */,
 				BD87ED852BBA6C090054723C /* VideoListViewController.swift in Sources */,
+				BD503A7A2BC6585000CD358E /* FavouriteViewController.swift in Sources */,
 				BD88EE4C2BA48A780036C493 /* SetRootVC.swift in Sources */,
 				BD7CC6612BB68B78000357A6 /* SlidingViewController.swift in Sources */,
+				BDE227022BC6BE1800D1CE7F /* CategoryCollectionCell.swift in Sources */,
+				BDE226FE2BC6957F00D1CE7F /* HomeProductViewCell.swift in Sources */,
 				BD86BF3B2BA476BD00DA6EB4 /* GoogleSignViewController.swift in Sources */,
+				BD406CDF2BC55FAF007F9383 /* HomeViewController.swift in Sources */,
+				BD503A762BC6583600CD358E /* ProfileViewController.swift in Sources */,
 				BDD8C1182BAC38D800E807B1 /* AnimationViewController.swift in Sources */,
 				BD7CC65E2BB68B2B000357A6 /* CustomViewController.swift in Sources */,
+				BD472AED2BBFCDDF00358E4C /* PopoverViewController.swift in Sources */,
 				BD7CC66D2BB6C6AE000357A6 /* AudioListViewController.swift in Sources */,
 				BD87ED872BBA6C220054723C /* VideoCollectionViewCell.swift in Sources */,
 				BD1625122BA4501E00C59333 /* SendSMSViewController.swift in Sources */,
+				BDB26B482BBE90E0007BAE0E /* DeviceResolutionViewController.swift in Sources */,
+				BDD16AD42BC906850091C248 /* ProductDetailsBottomSheetViewController.swift in Sources */,
+				BDA61E672BC506AB00AC07F9 /* PullToRefreshViewController.swift in Sources */,
 				BD1625102BA44F1800C59333 /* SMSViewController.swift in Sources */,
+				BD472AEF2BBFCEED00358E4C /* ShowPopViewController.swift in Sources */,
+				BD8C687C2BC9357300DCE5C5 /* CartTableViewCell.swift in Sources */,
 				BD7CC66F2BB6C732000357A6 /* CustomTableViewCell.swift in Sources */,
+				BD472AF72BC01A3800358E4C /* BottomSheetViewController.swift in Sources */,
 				BDA7B3312BA061B100277672 /* ViewController.swift in Sources */,
+				BDA891B42BC7C7B900400620 /* ProductDetailsViewController.swift in Sources */,
+				BD503A782BC6584600CD358E /* ShoppingCartViewController.swift in Sources */,
+				BD472AF42BBFF95000358E4C /* CreatePopoverView.swift in Sources */,
 				BD93E7A52BAA9F68009C2575 /* GradientButton.swift in Sources */,
+				BDE227042BC6C55500D1CE7F /* ProductListCollectionCell.swift in Sources */,
 				BD5D8B422BA99A42007559ED /* ShareDataViewController.swift in Sources */,
+				BD5E90262BBD22AE00772D1A /* AutoResizingViewController.swift in Sources */,
 				BD86BF392BA45ACE00DA6EB4 /* SendEmailViewController.swift in Sources */,
 				BDDF0B4A2BBC1C73002CEB12 /* FirstViewController.swift in Sources */,
 				BDA7B32D2BA061B100277672 /* AppDelegate.swift in Sources */,
 				BD87ED892BBA6C390054723C /* VideoPlayerViewController.swift in Sources */,
+				BD503A7C2BC66DF900CD358E /* IamgeSliderCell.swift in Sources */,
 				BDDF0B4C2BBC1C7F002CEB12 /* SecondViewController.swift in Sources */,
 				BDA7B32F2BA061B100277672 /* SceneDelegate.swift in Sources */,
+				BDE227002BC6A36500D1CE7F /* ProductListViewController.swift in Sources */,
 				BD7CC6672BB6A5F6000357A6 /* AudioViewController.swift in Sources */,
+				BD503A742BC654A300CD358E /* TabBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,7 +841,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -775,7 +875,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -71,5 +71,6 @@ extension SendEmailViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         print("Email Send Successfully")
         dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -5,6 +5,22 @@ PODS:
   - AppAuth/Core (1.7.2)
   - AppAuth/ExternalUserAgent (1.7.2):
     - AppAuth/Core
+  - FacebookCore (0.9.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FacebookLogin (0.9.0):
+    - FacebookCore (~> 0.9.0)
+    - FBSDKCoreKit (~> 5.0)
+    - FBSDKLoginKit (~> 5.0)
+  - FBSDKCoreKit (5.15.1):
+    - FBSDKCoreKit/Basics (= 5.15.1)
+    - FBSDKCoreKit/Core (= 5.15.1)
+  - FBSDKCoreKit/Basics (5.15.1)
+  - FBSDKCoreKit/Core (5.15.1):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.15.1):
+    - FBSDKLoginKit/Login (= 5.15.1)
+  - FBSDKLoginKit/Login (5.15.1):
+    - FBSDKCoreKit (~> 5.0)
   - GoogleMaps (7.4.0):
     - GoogleMaps/Maps (= 7.4.0)
   - GoogleMaps/Base (7.4.0)
@@ -19,33 +35,49 @@ PODS:
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 4.0, >= 1.5)
   - GTMSessionFetcher/Core (3.3.1)
+  - ImageSlideshow (1.9.2):
+    - ImageSlideshow/Core (= 1.9.2)
+  - ImageSlideshow/Core (1.9.2)
   - NavigationDrawer (1.0.3)
 
 DEPENDENCIES:
+  - FacebookLogin
+  - FBSDKLoginKit
   - GoogleMaps
   - GooglePlaces
   - GoogleSignIn
+  - ImageSlideshow
   - NavigationDrawer
 
 SPEC REPOS:
   trunk:
     - AppAuth
+    - FacebookCore
+    - FacebookLogin
+    - FBSDKCoreKit
+    - FBSDKLoginKit
     - GoogleMaps
     - GooglePlaces
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
+    - ImageSlideshow
     - NavigationDrawer
 
 SPEC CHECKSUMS:
   AppAuth: ca2458caccec349cc1e26d8d9e8fd7d22f1d01f3
+  FacebookCore: ba86524b66cfa86d0f8e65d08faa8504a9f732dd
+  FacebookLogin: 6cee9fd6e1fe976fe8f7eec199e27b28b14f5d63
+  FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
+  FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   GoogleMaps: 032f676450ba0779bd8ce16840690915f84e57ac
   GooglePlaces: 544e908d94860bf6f8fc1865b80d2c7eb6b5f937
   GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: 8a1b34ad97ebe6f909fb8b9b77fba99943007556
+  ImageSlideshow: be305b54eaf2b2cfc7a7141c7c734605d44dc07d
   NavigationDrawer: ad87622628ed59589f8fe8e2338d27109ca51a64
 
-PODFILE CHECKSUM: 40bef7996dd1efdf9fae52733ebc74c6fcfbd884
+PODFILE CHECKSUM: e6b4a2cce2194498a4290329045324d040b31f96
 
 COCOAPODS: 1.12.1

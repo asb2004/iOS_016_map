@@ -23,6 +23,8 @@ class VideoListViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longpressOnCell)))
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addVideoFile))
     }
     
@@ -88,6 +90,21 @@ class VideoListViewController: UIViewController {
 
     }
 
+    @objc func longpressOnCell(_ sender: UILongPressGestureRecognizer) {
+        let location = sender.location(in: collectionView)
+        
+        if let indexPath = self.collectionView.indexPathForItem(at: location) {
+            
+            let avplayer = AVPlayer(url: videoFilesURL[indexPath.row])
+            let playerController = AVPlayerViewController()
+            playerController.player = avplayer
+            present(playerController, animated: true, completion: nil)
+            avplayer.play()
+            
+        } else {
+            print("couldn't find index path")
+        }
+    }
 }
 
 extension VideoListViewController: UICollectionViewDataSource, UICollectionViewDelegate {

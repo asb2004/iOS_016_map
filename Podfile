@@ -10,6 +10,9 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'GoogleSignIn'
 pod 'NavigationDrawer'
+pod 'FacebookLogin'
+pod 'FBSDKLoginKit'
+pod 'ImageSlideshow'
 
   target 'iOS_016_mapTests' do
     inherit! :search_paths

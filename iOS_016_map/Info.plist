@@ -27,15 +27,7 @@
 	<string>Please allow to save image on device for sharing images.</string>
 	<key>GIDClientID</key>
 	<string>403945920079-rrm8jmmm6shdis0ug460kuosp6b9tglf.apps.googleusercontent.com</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.403945920079-rrm8jmmm6shdis0ug460kuosp6b9tglf</string>
-			</array>
-		</dict>
-	</array>
+	
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>whatsapp</string>
@@ -43,5 +35,30 @@
 		<string>instagram://</string>
 		<string>instagram-stories</string>
 	</array>
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+          <string>com.googleusercontent.apps.403945920079-rrm8jmmm6shdis0ug460kuosp6b9tglf</string>
+        <string>fb7525985160793198</string>
+      </array>
+      </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>7525985160793198</string>
+    <key>FacebookClientToken</key>
+    <string>a371cd7058b206c0bb13707d8f3bf53b</string>
+    <key>FacebookDisplayName</key>
+    <string>LoginDemo</string>
+    
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbauth2</string>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+    </array>
 </dict>
 </plist>

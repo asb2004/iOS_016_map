@@ -9,6 +9,8 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import GoogleSignIn
+import FacebookCore
+import FBSDKCoreKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,13 +22,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyDbArELia4n5rp8Jqq1NanUrzyEAA0BIPw")
         GMSPlacesClient.provideAPIKey("AIzaSyDbArELia4n5rp8Jqq1NanUrzyEAA0BIPw")
         
+        ApplicationDelegate.shared.application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
+        
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
             if error == nil || user != nil {
                 Switcher.updateRootVC(status: true)
             } else {
-                Switcher.updateRootVC(status: false)
+                if let token = AccessToken.current, !token.isExpired {
+                    Switcher.updateRootVC(status: true)
+                } else {
+                    Switcher.updateRootVC(status: false)
+                }
             }
         }
+        
+        
         
         return true
     }
@@ -47,6 +60,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         var handled: Bool
+        
+        ApplicationDelegate.shared.application(
+            app,
+            open: url,
+            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        )
         
         handled = GIDSignIn.sharedInstance.handle(url)
         

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JVW-A6-QjR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -99,7 +98,7 @@
                                             <action selector="signOutButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xDa-uI-IEH"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Zh7-zt-B5V">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Zh7-zt-B5V">
                                         <rect key="frame" x="0.0" y="248.5" width="290" height="485.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
@@ -284,8 +283,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FiZ-Oa-t1S">
-                                <rect key="frame" x="107" y="398" width="200" height="110"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FiZ-Oa-t1S">
+                                <rect key="frame" x="107" y="368" width="200" height="170"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xi9-Tm-Ziw" customClass="GIDSignInButton">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
@@ -303,6 +302,10 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="2SP-IT-ZXP"/>
                                         </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPi-Wb-LHc">
+                                        <rect key="frame" x="0.0" y="120" width="200" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -325,6 +328,7 @@
                     <navigationItem key="navigationItem" id="eZL-nM-0k0"/>
                     <connections>
                         <outlet property="appleButtonView" destination="zY4-jX-mgQ" id="W2Y-Mf-s3E"/>
+                        <outlet property="facebookLoginView" destination="lPi-Wb-LHc" id="LS4-ZH-Obl"/>
                         <outlet property="googleButtonView" destination="Xi9-Tm-Ziw" id="84k-zb-XIa"/>
                     </connections>
                 </viewController>
