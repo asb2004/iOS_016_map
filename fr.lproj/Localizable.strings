@@ -1,0 +1,3 @@
+"As the name suggests, the picker view allows the user to pick an item from the set of multiple items. PickerView can display one or multiple sets where each set is known as a component. Each component displays a series of indexed rows representing the selectable items. The user can select the items by rotating the wheels." = "Comme son nom l'indique, la vue du sélecteur permet à l'utilisateur de sélectionner un élément parmi un ensemble de plusieurs éléments. PickerView peut afficher un ou plusieurs ensembles, chaque ensemble étant appelé composant. Chaque composant affiche une série de lignes indexées représentant les éléments sélectionnables. L'utilisateur peut sélectionner les éléments en faisant tourner les roues.";
+
+

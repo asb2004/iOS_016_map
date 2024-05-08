@@ -115,13 +115,15 @@ class VideoPlayerViewController: UIViewController {
         
         avPlayer = AVPlayer(url: videoFilesURL[index])
         playerLayer = AVPlayerLayer(player: avPlayer)
-        playerLayer.frame = videoPlayerLayer.bounds
+        playerLayer.frame = view.frame
         if isFullScreen {
             playerLayer.videoGravity = .resizeAspectFill
         } else {
             playerLayer.videoGravity = .resizeAspect
         }
         videoPlayerLayer.layer.addSublayer(playerLayer)
+        videoPlayerLayer.layoutIfNeeded()
+        playerLayer.layoutIfNeeded()
         
         avPlayer.volume = 0.5
         
@@ -245,18 +247,26 @@ class VideoPlayerViewController: UIViewController {
     @IBAction func fullScreenButtonTapped(_ sender: UIButton) {
         if isFullScreen {
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-            UIViewController.attemptRotationToDeviceOrientation()
-            playerLayer.frame = videoPlayerLayer.bounds
-            playerLayer.videoGravity = .resizeAspect
-            isFullScreen = false
+            
         } else {
             UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-            UIViewController.attemptRotationToDeviceOrientation()
-            playerLayer.frame = videoPlayerLayer.bounds
-            playerLayer.videoGravity = .resizeAspectFill
-            isFullScreen = true
         }
         
+        UIViewController.attemptRotationToDeviceOrientation()
+        playerLayer.frame = videoPlayerLayer.bounds
+        isFullScreen = !isFullScreen
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        self.playerLayer.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        
+        if UIDevice.current.orientation.isLandscape {
+            self.isFullScreen = true
+        } else if UIDevice.current.orientation.isPortrait {
+            self.isFullScreen = false
+        }
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {

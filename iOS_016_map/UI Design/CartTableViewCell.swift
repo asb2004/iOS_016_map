@@ -35,7 +35,7 @@ class CartTableViewCell: UITableViewCell {
     @IBAction func minusButtonTapped(_ sender: UIButton) {
         if let num = numberOfItemLabel.text {
             let n = Int(num)
-            if n! > 0 {
+            if n! > 1 {
                 numberOfItemLabel.text = "\(n! - 1)"
             }
         }

@@ -11,6 +11,8 @@ import GooglePlaces
 import GoogleSignIn
 import FacebookCore
 import FBSDKLoginKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class ViewController: UIViewController {
     
@@ -21,7 +23,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     
     var isDrawerShowing = false
-    var drawerMenuList = ["SMS, Mail, Call", "Share", "Animation", "Custom Drawer", "Audio Player", "Video Player", "Device Resolution", "Auto Resizing", "Localization", "Action Sheet", "Popover View", "Pull To Refresh", "UI Design"]
+    var drawerMenuList = ["SMS, Mail, Call", "Share", "Animation", "Custom Drawer", "Audio Player", "Video Player", "Device Resolution", "Auto Resizing", "Localization", "Action Sheet", "Popover View", "Pull To Refresh", "UI Design", "Orientation", "Week 8", "Week 9", "Week 10", "Changes"]
 
     @IBOutlet weak var currentLocation: UIImageView!
     @IBOutlet weak var searchRouteButton: UIImageView!
@@ -43,9 +45,14 @@ class ViewController: UIViewController {
     
     var isSourceTapped = false
     var isDestinationTapped = false
+    
+    var db = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        language = Locale.current.languageCode!
+        UserDefaults.standard.set(language, forKey: "myLanguage")
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -54,8 +61,10 @@ class ViewController: UIViewController {
         if let value = UserDefaults.standard.string(forKey: "loginFrom") {
             if value == "google" {
                 getDataFromGoogle()
-            } else {
+            } else if value == "facebook" {
                 getUserDataFromFaceBook()
+            } else {
+                getDataFromFirebase()
             }
         }
         
@@ -66,7 +75,7 @@ class ViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        //locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
         
         
         let camera = GMSCameraPosition.camera(withLatitude: 21.2305298, longitude: 72.86389, zoom: 15.0)
@@ -96,6 +105,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
@@ -140,13 +150,32 @@ class ViewController: UIViewController {
           }
     }
     
+    func getDataFromFirebase() {
+        if let userID = Auth.auth().currentUser?.uid {
+            do {
+                db.collection("users").document(userID).getDocument { docSnepshot, err in
+                    if let err = err {
+                        print(err.localizedDescription)
+                        return
+                    }
+                    if let docSnepshot = docSnepshot {
+                        self.lblName.text = docSnepshot.data()!["name"] as? String
+                        self.lblEmail.text = docSnepshot.data()!["email"] as? String
+                    }
+                }
+            }
+        }
+    }
+    
     @IBAction func signOutButtonTapped(_ sender: UIButton) {
         
         if let value = UserDefaults.standard.string(forKey: "loginFrom") {
             if value == "google" {
                 GIDSignIn.sharedInstance.signOut()
-            } else {
+            } else if value == "facebook" {
                 LoginManager().logOut()
+            } else {
+                try? Auth.auth().signOut()
             }
         }
         Switcher.updateRootVC(status: false)
@@ -244,7 +273,9 @@ class ViewController: UIViewController {
             alertController.addAction(cancelAction)
 
             present(alertController, animated: true, completion: nil)
-            
+        case .authorizedAlways, .authorizedWhenInUse :
+            let camera = GMSCameraPosition.camera(withLatitude: currentLatitude, longitude: currentLongitude, zoom: 14.0)
+            mapView.animate(to: camera)
         default:
             print("default")
         }
@@ -286,71 +317,6 @@ class ViewController: UIViewController {
     func getRoutes() {
         let origin = "\(sourceLatitude),\(sourecLongitude)"
         let destination = "\(destinationLatitude),\(destinationLongitude)"
-        
-//        let session = URLSession.shared
-//
-//            let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&sensor=false&mode=driving&key=AIzaSyDuCz_PnycWVP2kZMgMwB5SSSc77iABQOM")!
-//
-//            let task = session.dataTask(with: url, completionHandler: {
-//                (data, response, error) in
-//
-//                guard error == nil else {
-//                    print(error!.localizedDescription)
-//                    return
-//                }
-//
-//                guard let jsonResult = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else {
-//
-//                    print("error in JSONSerialization")
-//                    return
-//
-//                }
-//
-//
-//
-//                guard let routes = jsonResult["routes"] as? [Any] else {
-//                    return
-//                }
-//
-//                print(routes)
-//
-//                guard let route = routes[0] as? [String: Any] else {
-//                    return
-//                }
-//
-//                guard let legs = route["legs"] as? [Any] else {
-//                    return
-//                }
-//
-//                guard let leg = legs[0] as? [String: Any] else {
-//                    return
-//                }
-//
-//                guard let steps = leg["steps"] as? [Any] else {
-//                    return
-//                }
-//                  for item in steps {
-//
-//                    guard let step = item as? [String: Any] else {
-//                        return
-//                    }
-//
-//                    guard let polyline = step["polyline"] as? [String: Any] else {
-//                        return
-//                    }
-//
-//                    guard let polyLineString = polyline["points"] as? String else {
-//                        return
-//                    }
-//
-//                    //Call this method to draw path on map
-//                    DispatchQueue.main.async {
-//                        self.drawPath(from: polyLineString)
-//                    }
-//
-//                }
-//            })
-//            task.resume()
         
         let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyDuCz_PnycWVP2kZMgMwB5SSSc77iABQOM"
 
@@ -446,8 +412,8 @@ extension ViewController: CLLocationManagerDelegate {
         currentLatitude = location.coordinate.latitude
         currentLongitude = location.coordinate.longitude
         
-        let camera = GMSCameraPosition.camera(withLatitude: currentLatitude, longitude: currentLongitude, zoom: 14.0)
-        mapView.animate(to: camera)
+//        let camera = GMSCameraPosition.camera(withLatitude: currentLatitude, longitude: currentLongitude, zoom: 14.0)
+//        mapView.animate(to: camera)
         
         //locationManager.startUpdatingLocation()
     }
@@ -534,7 +500,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "AutoResizingViewController") as! AutoResizingViewController
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 8 {
-            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "ActionSheetViewController") as! ActionSheetViewController
+            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "LanguageViewController") as! LanguageViewController
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 9 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "ActionSheetViewController") as! ActionSheetViewController
@@ -547,6 +513,24 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 12 {
             let vc = uiDemoStoryboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
+            let uiDesignVC = uiDemoStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            uiDesignVC.latitude = self.currentLatitude
+            uiDesignVC.longitude = self.currentLongitude
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 13 {
+            let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "OrientationViewController") as! OrientationViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 14 {
+            let vc = week8Stroyboard.instantiateViewController(withIdentifier: "PaymentListViewController") as! PaymentListViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 15 {
+            let vc = week9Stroyboard.instantiateViewController(withIdentifier: "Week9TopicListViewController") as! Week9TopicListViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 16 {
+            let vc = week10Storyboard.instantiateViewController(withIdentifier: "Week10TopicListController") as! Week10TopicListController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 17 {
+            let vc = changesStoryboard.instantiateViewController(withIdentifier: "ChangesListViewController") as! ChangesListViewController
             navigationController?.pushViewController(vc, animated: true)
         }
     }

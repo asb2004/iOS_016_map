@@ -1,0 +1,147 @@
+
+/* Class = "UIButton"; configuration.title = ""; ObjectID = "2tG-He-vdK"; */
+"2tG-He-vdK.configuration.title" = "";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "2tG-He-vdK"; */
+"2tG-He-vdK.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Call"; ObjectID = "BST-yx-a1l"; */
+"BST-yx-a1l.configuration.title" = "Call";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "BST-yx-a1l"; */
+"BST-yx-a1l.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Sign Out"; ObjectID = "F3H-HE-kIS"; */
+"F3H-HE-kIS.configuration.title" = "સાઇન આઉટ કરો";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "F3H-HE-kIS"; */
+"F3H-HE-kIS.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Email"; ObjectID = "G3C-Oe-FAa"; */
+"G3C-Oe-FAa.configuration.title" = "Email";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "G3C-Oe-FAa"; */
+"G3C-Oe-FAa.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "K4Y-pu-pAs"; */
+"K4Y-pu-pAs.text" = "Name";
+
+/* Class = "UITextField"; placeholder = "Search Destination Location"; ObjectID = "N4Q-5Y-17r"; */
+"N4Q-5Y-17r.placeholder" = "Search Destination Location";
+
+/* Class = "UITextField"; placeholder = "Enter Phone No."; ObjectID = "NJY-f6-QLR"; */
+"NJY-f6-QLR.placeholder" = "Enter Phone No.";
+
+/* Class = "UIButton"; configuration.title = "First"; ObjectID = "QeF-qt-3i8"; */
+"QeF-qt-3i8.configuration.title" = "First";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "QeF-qt-3i8"; */
+"QeF-qt-3i8.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Search Source Location"; ObjectID = "Reu-10-K14"; */
+"Reu-10-K14.placeholder" = "Search Source Location";
+
+/* Class = "UILabel"; text = "Email ID"; ObjectID = "SPN-9i-G8M"; */
+"SPN-9i-G8M.text" = "Email ID";
+
+/* Class = "UIButton"; configuration.title = "SMS"; ObjectID = "SZx-0f-zoV"; */
+"SZx-0f-zoV.configuration.title" = "SMS";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SZx-0f-zoV"; */
+"SZx-0f-zoV.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Home Screen"; ObjectID = "Slx-H8-L3f"; */
+"Slx-H8-L3f.text" = "Home Screen";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "TIb-HI-unV"; */
+"TIb-HI-unV.title" = "Item";
+
+/* Class = "UIButton"; configuration.title = "Instagram"; ObjectID = "TJ3-UO-3G0"; */
+"TJ3-UO-3G0.configuration.title" = "Instagram";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "TJ3-UO-3G0"; */
+"TJ3-UO-3G0.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Subject"; ObjectID = "Tny-Kq-Ggk"; */
+"Tny-Kq-Ggk.text" = "Subject";
+
+/* Class = "UITextField"; placeholder = "Enter Email Address"; ObjectID = "UBU-Ii-aJL"; */
+"UBU-Ii-aJL.placeholder" = "Enter Email Address";
+
+/* Class = "UIButton"; configuration.title = "Second"; ObjectID = "Vob-y0-VD7"; */
+"Vob-y0-VD7.configuration.title" = "Second";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Vob-y0-VD7"; */
+"Vob-y0-VD7.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "Vwu-mA-giM"; */
+"Vwu-mA-giM.title" = "Item";
+
+/* Class = "UIButton"; configuration.title = "Send Email"; ObjectID = "X8M-48-vtk"; */
+"X8M-48-vtk.configuration.title" = "Send Email";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "X8M-48-vtk"; */
+"X8M-48-vtk.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Phone No."; ObjectID = "dCx-J0-fxU"; */
+"dCx-J0-fxU.text" = "Phone No.";
+
+/* Class = "UILabel"; text = "abc@xyz.com"; ObjectID = "dYA-Xk-AoK"; */
+"dYA-Xk-AoK.text" = "abc@xyz.com";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "dZB-eV-3ZV"; */
+"dZB-eV-3ZV.text" = "Name";
+
+/* Class = "UITextField"; placeholder = "Enter Message"; ObjectID = "e3K-Ao-KAm"; */
+"e3K-Ao-KAm.placeholder" = "Enter Message";
+
+/* Class = "UITextField"; placeholder = "Enter Email Subject"; ObjectID = "fxl-nV-6Jm"; */
+"fxl-nV-6Jm.placeholder" = "Enter Email Subject";
+
+/* Class = "UILabel"; text = "abc@gmail.com"; ObjectID = "gql-By-qvz"; */
+"gql-By-qvz.text" = "abc@gmail.com";
+
+/* Class = "UIButton"; configuration.title = "Animate"; ObjectID = "iWH-EG-IHr"; */
+"iWH-EG-IHr.configuration.title" = "Animate";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "iWH-EG-IHr"; */
+"iWH-EG-IHr.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Sign In"; ObjectID = "jkj-Ac-vbU"; */
+"jkj-Ac-vbU.text" = "Sign In";
+
+/* Class = "UILabel"; text = "Email Body"; ObjectID = "niT-1S-0Fn"; */
+"niT-1S-0Fn.text" = "Email Body";
+
+/* Class = "UIButton"; configuration.title = "WhatsApp"; ObjectID = "ohz-w9-XFV"; */
+"ohz-w9-XFV.configuration.title" = "WhatsApp";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ohz-w9-XFV"; */
+"ohz-w9-XFV.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "rhZ-yX-7bW"; */
+"rhZ-yX-7bW.placeholder" = "Password";
+
+/* Class = "UIButton"; configuration.title = "Sign out"; ObjectID = "sM3-E6-zzS"; */
+"sM3-E6-zzS.configuration.title" = "Sign out";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "sM3-E6-zzS"; */
+"sM3-E6-zzS.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "t3J-Le-kBH"; */
+"t3J-Le-kBH.placeholder" = "Email Address";
+
+/* Class = "UILabel"; text = "Hello! This is first screen"; ObjectID = "tkC-n1-9xA"; */
+"tkC-n1-9xA.text" = "Hello! This is first screen";
+
+/* Class = "UILabel"; text = "Hello! This is sceond screen"; ObjectID = "tt2-di-bOU"; */
+"tt2-di-bOU.text" = "Hello! This is sceond screen";
+
+/* Class = "UIButton"; configuration.title = "Send SMS"; ObjectID = "ui7-wQ-nEG"; */
+"ui7-wQ-nEG.configuration.title" = "Send SMS";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ui7-wQ-nEG"; */
+"ui7-wQ-nEG.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Message"; ObjectID = "xBu-60-F1u"; */
+"xBu-60-F1u.text" = "Message";

@@ -37,6 +37,10 @@ class TabBarViewController: UIViewController {
         tabbarView.layer.shadowRadius = 10
         tabbarView.layer.shadowOpacity = 0.2
         
+        let leftEdge = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(back))
+        leftEdge.edges = .left
+        view.addGestureRecognizer(leftEdge)
+        
         reduceOpacity()
         
         homeVC = uiDemoStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
@@ -47,6 +51,10 @@ class TabBarViewController: UIViewController {
         
         favouriteVC = uiDemoStoryboard.instantiateViewController(withIdentifier: "FavouriteViewController") as? FavouriteViewController
 
+    }
+    
+    @objc func back() {
+        navigationController?.popViewController(animated: true)
     }
     
     func reduceOpacity() {
@@ -72,6 +80,12 @@ class TabBarViewController: UIViewController {
         contentView.addSubview(homeVC.view)
         homeVC.view.frame = contentView.bounds
         homeVC.didMove(toParent: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.isNavigationBarHidden = false
     }
     
     @IBAction func homeButtonTapped(_ sender: UIButton) {

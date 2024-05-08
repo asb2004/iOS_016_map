@@ -15,7 +15,29 @@ class ShoppingCartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialSetup()
+    }
+    
+    func initialSetup() {
+
+        // basic setup
+        view.backgroundColor = .white
+
+        // Create a new gradient layer
+        let gradientLayer = CAGradientLayer()
+        // Set the colors and locations for the gradient layer
+        gradientLayer.colors = [UIColor.white.cgColor, UIColor(named: "tabbar_btnback")!.cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+
+        // Set the start and end points for the gradient layer
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+
+        // Set the frame to the layer
+        gradientLayer.frame = view.frame
+
+        // Add the gradient layer as a sublayer to the background view
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     func setUpControls() {
@@ -41,7 +63,7 @@ extension ShoppingCartViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 135
+        return 150
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

@@ -31,6 +31,12 @@ class SendSMSViewController: UIViewController {
         
         if let phone = tfPhoneNo.text, let message = tvMessage.text {
             if !phone.isEmpty && phone.count == 10 {
+                
+                if message.isEmpty {
+                    showAlter(with: "Enter Message")
+                    return
+                }
+                
                 if MFMessageComposeViewController.canSendText() {
                     let controller = MFMessageComposeViewController()
                     controller.body = message

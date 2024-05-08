@@ -11,13 +11,24 @@ import GooglePlaces
 import GoogleSignIn
 import FacebookCore
 import FBSDKCoreKit
+import IQKeyboardManagerSwift
+import FirebaseCore
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    let googleClientID = "403945920079-rrm8jmmm6shdis0ug460kuosp6b9tglf.apps.googleusercontent.com"
+    //let googleClientID = "403945920079-rrm8jmmm6shdis0ug460kuosp6b9tglf.apps.googleusercontent.com"
+    let googleClientID = "734298926859-hjocmbr73l7fod8q2kt79c45e2e512k9.apps.googleusercontent.com"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        FirebaseApp.configure()
+        
+        IQKeyboardManager.shared.enable = true
+        
+        language = UserDefaults.standard.object(forKey: "myLanguage") as? String ?? "en"
+        
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyDbArELia4n5rp8Jqq1NanUrzyEAA0BIPw")
         GMSPlacesClient.provideAPIKey("AIzaSyDbArELia4n5rp8Jqq1NanUrzyEAA0BIPw")
@@ -34,7 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let token = AccessToken.current, !token.isExpired {
                     Switcher.updateRootVC(status: true)
                 } else {
-                    Switcher.updateRootVC(status: false)
+                    if Auth.auth().currentUser != nil {
+                        Switcher.updateRootVC(status: true)
+                    } else {
+                        Switcher.updateRootVC(status: false)
+                    }
+                    
                 }
             }
         }

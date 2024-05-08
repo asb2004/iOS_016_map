@@ -23,6 +23,8 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var backButtonImage: UIImageView!
     @IBOutlet weak var shareButtonImage: UIImageView!
     @IBOutlet weak var imageSliderView: UICollectionView!
+    @IBOutlet weak var sizeButtonStack: UIStackView!
+    @IBOutlet weak var colorsStack: UIStackView!
     
     var currentIndex = 0
     var timer: Timer!
@@ -43,6 +45,8 @@ class ProductDetailsViewController: UIViewController {
         strikeThroughLablePrice.attributedText = strikeThroughLablePrice.text?.strikeThrough()
         
         setUpControls()
+        sizeButtonSetUp()
+        colorsButtonSetUp()
         
         pageControl.numberOfPages = imageSet.count
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(showNextSlid), userInfo: nil, repeats: true)
@@ -101,6 +105,45 @@ class ProductDetailsViewController: UIViewController {
         let activityVC = UIActivityViewController(activityItems: ["hello"], applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
         self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    func colorsButtonSetUp() {
+        for img in colorsStack.arrangedSubviews {
+            let image = img as! UIImageView
+            image.layer.borderColor = UIColor(named: "tabbar_lightbtn")?.cgColor
+            image.layer.cornerRadius = image.bounds.height / 2
+            image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(colorButtonTapped(_:))))
+        }
+    }
+    
+    @objc func colorButtonTapped(_ sender: UITapGestureRecognizer) {
+        
+        guard let imageView = sender.view as? UIImageView else { return }
+        
+        for img in colorsStack.arrangedSubviews {
+            let image = img as! UIImageView
+            image.layer.borderWidth = 0.0
+        }
+        imageView.layer.borderWidth = 1.0
+    }
+    
+    func sizeButtonSetUp() {
+        for button in sizeButtonStack.arrangedSubviews {
+            let btn = button as! UIButton
+            btn.layer.cornerRadius = 5.0
+        }
+    }
+    
+    @IBAction func sizeButtons(_ sender: UIButton) {
+        for button in sizeButtonStack.arrangedSubviews {
+            let btn = button as! UIButton
+            
+            btn.backgroundColor = .white
+            btn.configuration?.baseForegroundColor = .black
+        }
+        
+        sender.backgroundColor = UIColor(named: "tabbar_lightbtn")
+        sender.configuration?.baseForegroundColor = .white
     }
     
     @objc func viewMoreButtonTapped() {

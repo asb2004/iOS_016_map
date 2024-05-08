@@ -2,6 +2,43 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow to use device camera for scanning barcode</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Please allow to specch recognization usage permission</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please allow to microphones usege permission</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+<!--				<string>com.googleusercontent.apps.403945920079-rrm8jmmm6shdis0ug460kuosp6b9tglf</string>-->
+<string>com.googleusercontent.apps.734298926859-hjocmbr73l7fod8q2kt79c45e2e512k9</string>
+<!--				<string>fb7525985160793198</string>-->
+                <string>fb1600294437387960</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+<!--	<string>7525985160793198</string>-->
+    <string>1600294437387960</string>
+	<key>FacebookClientToken</key>
+<!--	<string>a371cd7058b206c0bb13707d8f3bf53b</string>-->
+    <string>3f37777a2cf09b920bc6fa51f401239f</string>
+	<key>FacebookDisplayName</key>
+	<string>LoginDemo</string>
+	<key>GIDClientID</key>
+<!--	<string>403945920079-rrm8jmmm6shdis0ug460kuosp6b9tglf.apps.googleusercontent.com</string>-->
+    <string>734298926859-hjocmbr73l7fod8q2kt79c45e2e512k9.apps.googleusercontent.com</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbauth2</string>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -21,44 +58,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>By accessing your location, this app can find good places to eat for you.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please allow to save image on device for sharing images.</string>
-	<key>GIDClientID</key>
-	<string>403945920079-rrm8jmmm6shdis0ug460kuosp6b9tglf.apps.googleusercontent.com</string>
-	
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>whatsapp</string>
-		<string>instagram</string>
-		<string>instagram://</string>
-		<string>instagram-stories</string>
-	</array>
-    
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-          <string>com.googleusercontent.apps.403945920079-rrm8jmmm6shdis0ug460kuosp6b9tglf</string>
-        <string>fb7525985160793198</string>
-      </array>
-      </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>7525985160793198</string>
-    <key>FacebookClientToken</key>
-    <string>a371cd7058b206c0bb13707d8f3bf53b</string>
-    <key>FacebookDisplayName</key>
-    <string>LoginDemo</string>
-    
-    
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbauth2</string>
-        <string>fbapi</string>
-        <string>fb-messenger-share-api</string>
-    </array>
 </dict>
 </plist>

@@ -19,4 +19,23 @@ class ProductListCollectionCell: UICollectionViewCell {
         
         productImage.layer.cornerRadius = 20.0
     }
+    @IBAction func favButtonTapped(_ sender: UIButton) {
+        
+        if sender.imageView?.image == UIImage(systemName: "heart") {
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            sender.configuration?.baseForegroundColor = .red
+        } else {
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+            sender.configuration?.baseForegroundColor = .darkGray
+        }
+        
+    }
+    
+    @IBAction func bagButtonTapped(_ sender: UIButton) {
+        if sender.imageView?.image == UIImage(systemName: "bag") {
+            sender.setImage(UIImage(systemName: "bag.fill"), for: .normal)
+        } else {
+            sender.setImage(UIImage(systemName: "bag"), for: .normal)
+        }
+    }
 }

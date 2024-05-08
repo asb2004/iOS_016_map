@@ -34,13 +34,28 @@ class ProductListViewController: UIViewController {
         
         categoryCollecitonView.collectionViewLayout = CategoryCollectionFlow()
         productListCollection.collectionViewLayout = ProductListCollectionFlow()
-        
+        initialSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
+    }
+    
+    func initialSetup() {
+
+        view.backgroundColor = .white
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.white.cgColor, UIColor(named: "tabbar_btnback")!.cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradientLayer.frame = view.frame
+        
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     @IBAction func backButtonTapped(_ sender: UIButton) {

@@ -33,6 +33,7 @@ class SMSViewController: UIViewController {
         
         avc.addTextField { tfPhoneNo in
             tfPhoneNo.placeholder = "Enter Phone Number"
+            tfPhoneNo.keyboardType = .numberPad
         }
         
         avc.addAction(UIAlertAction(title: "Call", style: .default, handler: { _ in
@@ -41,6 +42,11 @@ class SMSViewController: UIViewController {
             if phone?.text?.count != 10 {
                 phone?.text = ""
                 phone?.placeholder = "Enter Valid Phone Number"
+                avc.dismiss(animated: true) {
+                    let avc  = UIAlertController(title: "Enter Valid phone number", message: nil, preferredStyle: .alert)
+                    avc.addAction(UIAlertAction(title: "okay", style: .cancel, handler: nil))
+                    self.present(avc, animated: true, completion: nil)
+                }
             } else {
                 self.makePhoneCall(with: (phone?.text)!)
             }
