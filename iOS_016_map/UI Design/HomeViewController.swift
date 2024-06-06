@@ -10,11 +10,14 @@ import GooglePlaces
 import GoogleMaps
 import MapKit
 import iOSDropDown
+import SwiftUI
 
 let uiDemoStoryboard = UIStoryboard(name: "UIDemo", bundle: nil)
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var logoTopConstant: NSLayoutConstraint!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -25,6 +28,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var SortByText: DropDown!
     @IBOutlet weak var topRatedButton: UIButton!
     @IBOutlet weak var distanceButton: UIButton!
+    @IBOutlet weak var favouriteButton: UIButton!
+    @IBOutlet weak var openButton: UIButton!
+    @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var mostVisitedButton: UIButton!
     
     var longitude = 0.0
     var latitude = 0.0
@@ -33,13 +40,30 @@ class HomeViewController: UIViewController {
     var currentIndex = 0
     var timer: Timer!
     
+    var gradientLayer = CAGradientLayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+        collectionVIew.delegate = self
+        collectionVIew.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         
         SortByText.layer.cornerRadius = 10.0
         pricesText.layer.cornerRadius = 10.0
         topRatedButton.layer.cornerRadius = 10.0
         distanceButton.layer.cornerRadius = 10.0
+        favouriteButton.layer.cornerRadius = 10.0
+        openButton.layer.cornerRadius = 10.0
+        mostVisitedButton.layer.cornerRadius = 10.0
+        locationButton.layer.cornerRadius = 10.0
         
         initialSetup()
         
@@ -72,8 +96,27 @@ class HomeViewController: UIViewController {
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if UIDevice.current.orientation.isLandscape {
+            print("landscape")
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        tableView.removeObserver(self, forKeyPath: "contentSize")
     }
     
     func initialSetup() {
@@ -82,7 +125,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
 
         // Create a new gradient layer
-        let gradientLayer = CAGradientLayer()
+        gradientLayer = CAGradientLayer()
         // Set the colors and locations for the gradient layer
         gradientLayer.colors = [UIColor.white.cgColor, UIColor(named: "tabbar_btnback")!.cgColor]
         gradientLayer.locations = [0.0, 1.0]
@@ -96,6 +139,16 @@ class HomeViewController: UIViewController {
 
         // Add the gradient layer as a sublayer to the background view
         view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    @objc func orientationChanged() {
+        gradientLayer.frame = view.frame
+        
+        if UIDevice.current.orientation.isLandscape {
+            self.logoTopConstant.constant = 10
+        } else {
+            self.logoTopConstant.constant = 50
+        }
     }
      
     @objc func showNextSlid() {
@@ -115,6 +168,12 @@ class HomeViewController: UIViewController {
         present(autoCompleteController, animated: true, completion: nil)
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize", let tableView = object as? UITableView {
+            tableViewHeight.constant = tableView.contentSize.height
+        }
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -126,6 +185,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageSliderCell", for: indexPath) as! IamgeSliderCell
         cell.imageView.image = imageSet[indexPath.row]
         return cell
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let visibleRect = CGRect(origin: collectionVIew.contentOffset, size: collectionVIew.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+
+        if let indexPath = collectionVIew.indexPathForItem(at: visiblePoint) {
+            pageControl.currentPage = indexPath.item
+            currentIndex = indexPath.item
+        }
     }
 }
 

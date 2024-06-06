@@ -7,7 +7,8 @@
 
 import UIKit
 
-var language: String = "en"
+var USER_LANGUAGE: String = "en"
+var languagesTag = ["Default","en", "hi", "es", "ja", "gu", "fr"]
 
 class LanguageViewController: UIViewController {
 
@@ -15,8 +16,8 @@ class LanguageViewController: UIViewController {
     @IBOutlet weak var languageText: UITextField!
     
     var languagePicker: UIPickerView!
-    var languages = ["English", "Hindi", "Spenish", "Japanese", "Gujarati", "French"]
-    var languagesTag = ["en", "hi", "es", "ja", "gu", "fr"]
+    var languages = ["Default","English", "Hindi", "Spenish", "Japanese", "Gujarati", "French"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +28,15 @@ class LanguageViewController: UIViewController {
         languagePicker.delegate = self
         languagePicker.dataSource = self
         
-        languageText.text = languages[languagesTag.firstIndex(of: language)!]
-        textLabel.text = "As the name suggests, the picker view allows the user to pick an item from the set of multiple items. PickerView can display one or multiple sets where each set is known as a component. Each component displays a series of indexed rows representing the selectable items. The user can select the items by rotating the wheels.".localized(lang: language)
+        //languageText.text = languages[languagesTag.firstIndex(of: language)!]
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Setting", style: .plain, target: self, action: #selector(openSettings))
+        if let lang = UserDefaults.standard.object(forKey: "myLanguage") as? String {
+            languageText.text = languages[languagesTag.firstIndex(of: lang)!]
+        }
+        
+        textLabel.text = "As the name suggests, the picker view allows the user to pick an item from the set of multiple items. PickerView can display one or multiple sets where each set is known as a component. Each component displays a series of indexed rows representing the selectable items. The user can select the items by rotating the wheels.".localized(lang: USER_LANGUAGE)
+        
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Setting", style: .plain, target: self, action: #selector(openSettings))
     }
     
     @objc func openSettings() {
@@ -57,9 +63,24 @@ extension LanguageViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.languageText.text = languages[row]
         self.languageText.resignFirstResponder()
-        language = languagesTag[row]
-        UserDefaults.standard.set(language, forKey: "myLanguage")
-        UserDefaults.standard.set([language], forKey: "AppleLanguages")
+//        language = languagesTag[row]
+//        UserDefaults.standard.set(language, forKey: "myLanguage")
+        //UserDefaults.standard.set([language], forKey: "AppleLanguages")
+        
+        if row == 0 {
+            //self.languageText.text = "Default"
+            if let langTag = Locale.preferredLanguages.first?.components(separatedBy: "-").first {
+                UserDefaults.standard.set(languagesTag[row], forKey: "myLanguage")
+                if languagesTag.contains(langTag) {
+                    USER_LANGUAGE = langTag
+                } else {
+                    USER_LANGUAGE = "en"
+                }
+            }
+        } else {
+            USER_LANGUAGE = languagesTag[row]
+            UserDefaults.standard.set(USER_LANGUAGE, forKey: "myLanguage")
+        }
         
         self.viewDidLoad()
     }

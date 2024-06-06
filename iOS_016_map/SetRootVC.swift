@@ -22,7 +22,6 @@ class Switcher {
         
         let window = (UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate).window
         window?.rootViewController = rootVC
-        
     }
     
 }

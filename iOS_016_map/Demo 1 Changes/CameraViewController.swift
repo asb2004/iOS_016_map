@@ -108,6 +108,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func getThumbnailImageFromURL(url: URL) -> UIImage? {
         let asset = AVAsset(url: url)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
         
         do {
             let thumbnailImage = try imageGenerator.copyCGImage(at: CMTime(value: 1, timescale: 60), actualTime: nil)

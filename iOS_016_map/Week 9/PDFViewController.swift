@@ -21,7 +21,18 @@ class PDFViewController: UIViewController {
           pdfView.document = PDFDocument(data: data)
           pdfView.autoScales = true
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(saveButtonTapped))
 
     }
 
+    @objc func saveButtonTapped() {
+        
+        let filePath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("webview.pdf")
+        try? documentData!.write(to: filePath, options: .atomic)
+        print(filePath)
+        let activityViewController = UIActivityViewController(activityItems: [filePath], applicationActivities: [])
+        present(activityViewController, animated: true, completion: nil)
+        
+    }
 }

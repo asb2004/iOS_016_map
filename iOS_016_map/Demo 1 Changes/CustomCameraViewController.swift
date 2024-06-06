@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 import AVKit
 import SwiftVideoGenerator
+import CoreMotion
 
 var capturedImages: [Data] = []
 var videoURLs: [URL] = []
@@ -55,6 +56,10 @@ class CustomCameraViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var outputURL: URL?
     var secCount = 0.0
     
+    let motionManager = CMMotionManager()
+    var isLeftLandscape = false
+    var isRightLandscape = false
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -77,6 +82,29 @@ class CustomCameraViewController: UIViewController, AVCapturePhotoCaptureDelegat
         navigationController?.setToolbarHidden(true, animated: false)
         navigationController?.isNavigationBarHidden = true
         
+        if motionManager.isDeviceMotionAvailable {
+        // Set up motion updates
+            motionManager.deviceMotionUpdateInterval = 0.1
+            motionManager.startDeviceMotionUpdates(to: .main) { [weak self] (data, error) in
+                guard let self = self, let data = data else { return }
+
+                // Determine orientation based on device motion
+                let x = data.gravity.x
+                let y = data.gravity.y
+
+                let angle = atan2(y, x)
+                let degrees = angle * (180 / .pi)
+
+                if abs(degrees) > 135 {
+                    self.isRightLandscape = true
+                } else if abs(degrees) < 45 {
+                    self.isLeftLandscape = true
+                } else {
+                    self.isLeftLandscape = false
+                    self.isRightLandscape = false
+                }
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -205,6 +233,13 @@ class CustomCameraViewController: UIViewController, AVCapturePhotoCaptureDelegat
 
    
     @IBAction func captureImageTapped(_ sender: Any) {
+        
+        if UIDevice.current.orientation.isPortrait {
+           print("isPortrait")
+        } else if UIDevice.current.orientation.isLandscape {
+           print("landscape")
+        }
+        
         touchView.configuration?.baseForegroundColor = .white
         if autoTorchOn {
             do{
@@ -339,10 +374,12 @@ class CustomCameraViewController: UIViewController, AVCapturePhotoCaptureDelegat
     func getThumbnailImageFromURL(url: URL) -> UIImage? {
         let asset = AVAsset(url: url)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
         
         do {
             let thumbnailImage = try imageGenerator.copyCGImage(at: CMTime(value: 1, timescale: 60), actualTime: nil)
-            let image = UIImage(cgImage: thumbnailImage, scale: 1.0, orientation: .right)
+            let image = UIImage(cgImage: thumbnailImage)
+            //let image = UIImage(cgImage: thumbnailImage, scale: 1.0, orientation: .right)
             return image
         } catch {
             fatalError("error")
@@ -416,18 +453,62 @@ class CustomCameraViewController: UIViewController, AVCapturePhotoCaptureDelegat
         }
         
         data = imageData
-        capturedImages.insert(imageData, at: 0)
-        captureImageVIew.image = UIImage(data: data)
         
-        if !isBackOn {
-            let image = UIImage(cgImage: (captureImageVIew.image?.cgImage)!, scale: 1.0, orientation: .leftMirrored)
-            captureImageVIew.image = image
-            capturedImages.remove(at: 0)
-            capturedImages.insert((captureImageVIew.image?.jpegData(compressionQuality: 1))!, at: 0)
+        if isRightLandscape {
+            
+            print("landscap imagee")
+            let originalImage = UIImage(data: self.data)
+            let landscapeImage = UIImage(cgImage: (originalImage?.cgImage)!, scale: 1.0, orientation: .up)
+            self.data = landscapeImage.jpegData(compressionQuality: 1)
+            capturedImages.insert(self.data, at: 0)
+            self.captureImageVIew.image = landscapeImage
+            
+            if !self.isBackOn {
+                let image = UIImage(cgImage: (self.captureImageVIew.image?.cgImage)!, scale: 1.0, orientation: .downMirrored)
+                self.captureImageVIew.image = image
+                capturedImages.remove(at: 0)
+                capturedImages.insert((self.captureImageVIew.image?.jpegData(compressionQuality: 1))!, at: 0)
+            }
+            
+        } else if isLeftLandscape {
+    
+            print("landscap imagee")
+            let originalImage = UIImage(data: self.data)
+            let landscapeImage = UIImage(cgImage: (originalImage?.cgImage)!, scale: 1.0, orientation: .down)
+            self.data = landscapeImage.jpegData(compressionQuality: 1)
+            capturedImages.insert(self.data, at: 0)
+            self.captureImageVIew.image = landscapeImage
+            
+            if !self.isBackOn {
+                let image = UIImage(cgImage: (self.captureImageVIew.image?.cgImage)!, scale: 1.0, orientation: .upMirrored)
+                self.captureImageVIew.image = image
+                capturedImages.remove(at: 0)
+                capturedImages.insert((self.captureImageVIew.image?.jpegData(compressionQuality: 1))!, at: 0)
+            }
+            
+        } else {
+            
+            print("portait image")
+            capturedImages.insert(self.data, at: 0)
+            self.captureImageVIew.image = UIImage(data: self.data)
+            
+            if !self.isBackOn {
+                let image = UIImage(cgImage: (self.captureImageVIew.image?.cgImage)!, scale: 1.0, orientation: .leftMirrored)
+                self.captureImageVIew.image = image
+                capturedImages.remove(at: 0)
+                capturedImages.insert((self.captureImageVIew.image?.jpegData(compressionQuality: 1))!, at: 0)
+            }
+            
         }
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if motionManager.isDeviceMotionActive {
+            self.motionManager.stopDeviceMotionUpdates()
+        }
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

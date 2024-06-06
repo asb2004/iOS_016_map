@@ -14,7 +14,7 @@ class SpeechToTextViewController: UIViewController {
     @IBOutlet weak var speechText: UILabel!
     
     let audioEngine = AVAudioEngine()
-    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
+    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognizerTask: SFSpeechRecognitionTask?
     
@@ -23,6 +23,7 @@ class SpeechToTextViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.requestAuthorization()
+        configureAudioSession()
     }
 
     @IBAction func startButtonTapped(_ sender: UIButton) {
@@ -55,6 +56,16 @@ class SpeechToTextViewController: UIViewController {
                     self.startButton.isEnabled = true
                 }
             }
+        }
+    }
+    
+    func configureAudioSession() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("Audio session setup failed: \(error)")
         }
     }
     

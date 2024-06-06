@@ -65,6 +65,7 @@ protocol EmployeesValueChanged {
 
 class EmployeeListViewController: UIViewController {
 
+    @IBOutlet weak var noEmployeeLabel: UILabel!
     @IBOutlet weak var employeeTable: UITableView!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var addButton: UIButton!
@@ -118,6 +119,11 @@ class EmployeeListViewController: UIViewController {
             
             self.loader.isHidden = true
             self.employeeTable.reloadData()
+            if self.employees.isEmpty {
+                self.noEmployeeLabel.isHidden = false
+            } else {
+                self.noEmployeeLabel.isHidden = true
+            }
         }
     }
     
@@ -200,6 +206,12 @@ extension EmployeeListViewController: UITableViewDataSource, UITableViewDelegate
             
             self.employees.remove(at: indexPath.row)
             self.employeeTable.reloadData()
+            
+            if self.employees.isEmpty {
+                self.noEmployeeLabel.isHidden = false
+            } else {
+                self.noEmployeeLabel.isHidden = true
+            }
         }
         
         return UISwipeActionsConfiguration(actions: [deleteButton])

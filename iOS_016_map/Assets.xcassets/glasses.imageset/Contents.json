@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group 1000005169.png",
+      "filename" : "Sunglass.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Sunglass@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Sunglass@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

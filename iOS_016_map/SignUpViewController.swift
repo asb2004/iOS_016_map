@@ -109,6 +109,8 @@ class SignUpViewController: UIViewController {
                     self.db.collection("users").document(result.user.uid).setData([
                         "name" : nameTxt,
                         "email" : emailTxt,
+                        "profile" : "",
+                        "uid" : result.user.uid
                     ])
                     
                     UserDefaults.standard.set("firebase", forKey: "loginFrom")

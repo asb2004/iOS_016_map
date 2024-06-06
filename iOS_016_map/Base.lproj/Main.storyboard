@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JVW-A6-QjR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fua-t1-XKx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iOS_016_map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="iOS_016_map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,6 +130,10 @@
                                     <constraint firstItem="gql-By-qvz" firstAttribute="leading" secondItem="Bdd-Hd-EFT" secondAttribute="leading" constant="20" id="yzQ-46-6u8"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="EUw-Kl-yes">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" systemColor="tintColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -145,11 +149,13 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N4Q-5Y-17r" secondAttribute="trailing" constant="10" id="ZsA-CG-om1"/>
                             <constraint firstItem="Bdd-Hd-EFT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="arK-xX-cn9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Reu-10-K14" secondAttribute="trailing" constant="10" id="dU4-1g-9u2"/>
+                            <constraint firstItem="EUw-Kl-yes" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dtZ-BS-ARU"/>
                             <constraint firstItem="Reu-10-K14" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="iGp-nM-Isi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5Se-Ma-OZC" secondAttribute="trailing" id="jZi-5h-kuU"/>
                             <constraint firstItem="5Se-Ma-OZC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kr4-1i-nuH"/>
                             <constraint firstItem="N4Q-5Y-17r" firstAttribute="top" secondItem="Reu-10-K14" secondAttribute="bottom" constant="5" id="lIy-kW-FbJ"/>
                             <constraint firstItem="Bdd-Hd-EFT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pW4-JY-k1X"/>
+                            <constraint firstItem="EUw-Kl-yes" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qAC-CA-tQg"/>
                             <constraint firstItem="Bdd-Hd-EFT" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="rHD-9L-ITW"/>
                             <constraint firstItem="Reu-10-K14" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="uCA-bm-5e5"/>
                         </constraints>
@@ -167,6 +173,7 @@
                         <outlet property="drawerView" destination="Bdd-Hd-EFT" id="rVy-T9-4rt"/>
                         <outlet property="lblEmail" destination="gql-By-qvz" id="nP2-4n-GZN"/>
                         <outlet property="lblName" destination="K4Y-pu-pAs" id="YzJ-KI-2Sf"/>
+                        <outlet property="loader" destination="EUw-Kl-yes" id="C6e-le-UuQ"/>
                         <outlet property="profileImage" destination="VgZ-Lz-djh" id="AqK-xV-dK3"/>
                         <outlet property="searchRouteButton" destination="xAO-xL-XE0" id="pyB-Tx-IFc"/>
                         <outlet property="tableView" destination="Zh7-zt-B5V" id="CF3-L6-fQN"/>
@@ -233,7 +240,7 @@
                                     <constraint firstAttribute="height" constant="45" id="udR-Rj-8Ke"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Instagram">
+                                <buttonConfiguration key="configuration" style="plain" title="Share">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
@@ -278,7 +285,7 @@
         <!--Navigation Controller-->
         <scene sceneID="b7g-t8-sz8">
             <objects>
-                <navigationController storyboardIdentifier="rootNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="JVW-A6-QjR" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="rootNavigationVC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JVW-A6-QjR" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2rr-ad-vMN">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1049,7 +1056,7 @@ EBA
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vcF-ZK-ASS">
                                 <rect key="frame" x="20" y="397.5" width="374" height="40"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5o8-ac-m9H">
+                                    <view userInteractionEnabled="NO" alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5o8-ac-m9H">
                                         <rect key="frame" x="0.0" y="0.0" width="118" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
@@ -1069,6 +1076,9 @@ EBA
                                     <constraint firstAttribute="height" constant="40" id="1bF-JO-g7i"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="JaL-2a-Due">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3d6-NZ-F0s"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1079,6 +1089,7 @@ EBA
                             <constraint firstItem="1Zb-hs-gaf" firstAttribute="leading" secondItem="nks-DX-tlw" secondAttribute="leading" id="8lp-Ec-tzi"/>
                             <constraint firstAttribute="trailing" secondItem="VSf-G2-A92" secondAttribute="trailing" constant="20" id="Gbu-qp-mDM"/>
                             <constraint firstItem="9T8-ih-nBI" firstAttribute="centerX" secondItem="3d6-NZ-F0s" secondAttribute="centerX" id="Hgu-3H-bke"/>
+                            <constraint firstItem="JaL-2a-Due" firstAttribute="centerY" secondItem="fb3-bi-2Na" secondAttribute="centerY" id="Ipb-BC-Nl9"/>
                             <constraint firstItem="cdV-vp-fMo" firstAttribute="top" secondItem="VSf-G2-A92" secondAttribute="bottom" constant="20" id="Jra-mE-08d"/>
                             <constraint firstItem="cdV-vp-fMo" firstAttribute="top" secondItem="VSf-G2-A92" secondAttribute="bottom" constant="20" id="KYD-Fi-5cO"/>
                             <constraint firstItem="vcF-ZK-ASS" firstAttribute="top" secondItem="9T8-ih-nBI" secondAttribute="bottom" constant="20" id="TJZ-E5-xof"/>
@@ -1086,6 +1097,7 @@ EBA
                             <constraint firstItem="TKj-UF-lM2" firstAttribute="trailing" secondItem="nks-DX-tlw" secondAttribute="trailing" id="bZQ-ya-dqo"/>
                             <constraint firstItem="9T8-ih-nBI" firstAttribute="top" secondItem="cdV-vp-fMo" secondAttribute="bottom" constant="20" id="d3Q-0N-LWz"/>
                             <constraint firstItem="cdV-vp-fMo" firstAttribute="leading" secondItem="3d6-NZ-F0s" secondAttribute="leading" constant="20" id="dFS-pg-jxw"/>
+                            <constraint firstItem="JaL-2a-Due" firstAttribute="centerX" secondItem="fb3-bi-2Na" secondAttribute="centerX" id="dcX-he-ySk"/>
                             <constraint firstItem="VSf-G2-A92" firstAttribute="top" secondItem="3d6-NZ-F0s" secondAttribute="top" constant="20" id="eNS-yJ-6Cg"/>
                             <constraint firstItem="VSf-G2-A92" firstAttribute="leading" secondItem="3d6-NZ-F0s" secondAttribute="leading" constant="20" id="hQb-aJ-LFp"/>
                             <constraint firstItem="1Zb-hs-gaf" firstAttribute="centerY" secondItem="9T8-ih-nBI" secondAttribute="centerY" id="iz5-b6-ZgU"/>
@@ -1108,6 +1120,7 @@ EBA
                         <outlet property="facebookLoginView" destination="IYf-RE-V8B" id="6eZ-iQ-bUU"/>
                         <outlet property="forgotText" destination="uto-6w-K5D" id="RbG-tq-Sjs"/>
                         <outlet property="googleButtonView" destination="Hol-ha-lrt" id="3RM-Zd-jPw"/>
+                        <outlet property="loader" destination="JaL-2a-Due" id="ltj-Mj-EA0"/>
                         <outlet property="passwordText" destination="bA4-L7-r98" id="wNi-X1-SqY"/>
                         <outlet property="registerText" destination="Wfv-d0-Pfp" id="nA1-aI-ZW2"/>
                     </connections>
@@ -1318,7 +1331,7 @@ EBA
     </scenes>
     <designables>
         <designable name="TJ3-UO-3G0">
-            <size key="intrinsicContentSize" width="111.5" height="38"/>
+            <size key="intrinsicContentSize" width="75" height="38"/>
         </designable>
         <designable name="ohz-w9-XFV">
             <size key="intrinsicContentSize" width="116" height="38"/>
@@ -1365,6 +1378,9 @@ EBA
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

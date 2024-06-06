@@ -13,6 +13,7 @@ var imageList = [UIImage]()
 
 class GalleryImageListViewController: UIViewController {
 
+    @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -20,22 +21,23 @@ class GalleryImageListViewController: UIViewController {
         
         collectionView.collectionViewLayout = GalleryImageCollectionFlow()
         
-        imageList = [
-            UIImage(named: "img_1")!,
-            UIImage(named: "shop_1")!,
-            UIImage(named: "shop_2")!,
-            UIImage(named: "shop_3")!,
-            UIImage(named: "shop_4")!,
-            UIImage(named: "shop_5")!,
-            UIImage(named: "img_1")!,
-            UIImage(named: "shop_1")!,
-            UIImage(named: "shop_2")!,
-            UIImage(named: "shop_3")!,
-            UIImage(named: "shop_4")!,
-            UIImage(named: "shop_5")!
-        ]
+//        imageList = [
+//            UIImage(named: "img_1")!,
+//            UIImage(named: "shop_1")!,
+//            UIImage(named: "shop_2")!,
+//            UIImage(named: "shop_3")!,
+//            UIImage(named: "shop_4")!,
+//            UIImage(named: "shop_5")!,
+//            UIImage(named: "img_1")!,
+//            UIImage(named: "shop_1")!,
+//            UIImage(named: "shop_2")!,
+//            UIImage(named: "shop_3")!,
+//            UIImage(named: "shop_4")!,
+//            UIImage(named: "shop_5")!
+//        ]
         
-        //grabPhotos()
+        loader.isHidden = false
+        grabPhotos()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,9 +80,10 @@ class GalleryImageListViewController: UIViewController {
                     if count % 10 == 0 {
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
+                            self.loader.isHidden = true
                         }
                     }
-                    if count == 200 {
+                    if count == 50 {
                         break
                     }
                 }
@@ -108,22 +111,24 @@ extension GalleryImageListViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = week9Stroyboard.instantiateViewController(withIdentifier: "ImagePreviewViewController") as! ImagePreviewViewController
-        vc.selectedIndex = indexPath.row
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = week9Stroyboard.instantiateViewController(withIdentifier: "ImagePreviewViewController") as! ImagePreviewViewController
+//        vc.selectedIndex = indexPath.row
+//        navigationController?.pushViewController(vc, animated: true)
         
-//        let gallery = SwiftPhotoGallery(delegate: self, dataSource: self)
-//
-//        gallery.backgroundColor = UIColor.black
-//
-//        gallery.hidePageControl = true
-//
-//        gallery.currentPage = indexPath.row
-//
-//        gallery.modalPresentationStyle = .fullScreen
-//        present(gallery, animated: true, completion: { () -> Void in
-//            gallery.currentPage = indexPath.row
-//        })
+        let gallery = SwiftPhotoGallery(delegate: self, dataSource: self)
+
+        gallery.backgroundColor = UIColor.black
+
+        gallery.hidePageControl = true
+
+        //gallery.currentPage = indexPath.row
+
+        gallery.modalPresentationStyle = .fullScreen
+        present(gallery, animated: true, completion: { () -> Void in
+            DispatchQueue.main.async {
+                gallery.currentPage = indexPath.row
+            }
+        })
     }
 }
 
@@ -160,3 +165,4 @@ class GalleryImageCollectionFlow: UICollectionViewFlowLayout {
         }
     }
 }
+

@@ -9,6 +9,7 @@ import UIKit
 
 class ProductDetailsViewController: UIViewController {
 
+    @IBOutlet weak var imageSliderWidth: NSLayoutConstraint!
     @IBOutlet weak var RateButton: UIButton!
     @IBOutlet weak var addToBagButton: UIButton!
     @IBOutlet weak var imageSliderHeight: NSLayoutConstraint!
@@ -25,6 +26,8 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var imageSliderView: UICollectionView!
     @IBOutlet weak var sizeButtonStack: UIStackView!
     @IBOutlet weak var colorsStack: UIStackView!
+    
+    var imageSliderWidthConstraint: NSLayoutConstraint?
     
     var currentIndex = 0
     var timer: Timer!
@@ -44,12 +47,28 @@ class ProductDetailsViewController: UIViewController {
         
         strikeThroughLablePrice.attributedText = strikeThroughLablePrice.text?.strikeThrough()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
         setUpControls()
         sizeButtonSetUp()
         colorsButtonSetUp()
         
         pageControl.numberOfPages = imageSet.count
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(showNextSlid), userInfo: nil, repeats: true)
+    }
+    
+    @objc func orientationDidChange(_ notification: Notification) {
+        
+        // Update the width constraint based on orientation
+        if UIDevice.current.orientation.isLandscape {
+            imageSliderWidth.constant = UIScreen.main.bounds.width * 0.6
+        } else {
+            imageSliderWidth.constant = UIScreen.main.bounds.width * 1
+        }
+        
+        self.imageSliderView.layoutIfNeeded()
+        self.view.layoutIfNeeded()
+        self.imageSliderView.reloadData()
     }
     
     func setUpControls() {
@@ -59,6 +78,7 @@ class ProductDetailsViewController: UIViewController {
         shareButtonImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(shareButtonTapped)))
         
         imageSliderHeight.constant = UIScreen.main.bounds.height * 0.4
+        imageSliderWidth.constant = UIScreen.main.bounds.width * 1
         
         viewMoreButtonView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewMoreButtonTapped)))
         
@@ -173,6 +193,16 @@ extension ProductDetailsViewController: UICollectionViewDelegate, UICollectionVi
         let cell = imageSliderView.dequeueReusableCell(withReuseIdentifier: "ProductImageSliderCell", for: indexPath) as! ProductImageSliderCell
         cell.productImage.image = imageSet[indexPath.row]
         return cell
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let visibleRect = CGRect(origin: imageSliderView.contentOffset, size: imageSliderView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+
+        if let indexPath = imageSliderView.indexPathForItem(at: visiblePoint) {
+            pageControl.currentPage = indexPath.item
+            currentIndex = indexPath.item
+        }
     }
 }
 

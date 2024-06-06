@@ -13,9 +13,11 @@ import FacebookCore
 import FBSDKLoginKit
 import FirebaseAuth
 import FirebaseFirestore
+import StripeCore
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var drawerView: UIView!
     @IBOutlet weak var lblEmail: UILabel!
@@ -23,7 +25,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     
     var isDrawerShowing = false
-    var drawerMenuList = ["SMS, Mail, Call", "Share", "Animation", "Custom Drawer", "Audio Player", "Video Player", "Device Resolution", "Auto Resizing", "Localization", "Action Sheet", "Popover View", "Pull To Refresh", "UI Design", "Orientation", "Week 8", "Week 9", "Week 10", "Changes"]
+    var drawerMenuList = ["Changes", "Custom Drawer", "SMS, Mail, Call", "Animation", "Share", "Audio Player", "Video Player", "Device Resolution", "Auto Resizing", "UI Design", "Localization", "Action Sheet", "Popover View", "Orientation",  "Pull To Refresh", "Week 8", "Week 9", "Week 10", "Week 11", "Chat Demo"]
 
     @IBOutlet weak var currentLocation: UIImageView!
     @IBOutlet weak var searchRouteButton: UIImageView!
@@ -50,9 +52,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        language = Locale.current.languageCode!
-        UserDefaults.standard.set(language, forKey: "myLanguage")
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -159,6 +158,9 @@ class ViewController: UIViewController {
                         return
                     }
                     if let docSnepshot = docSnepshot {
+                        
+                        self.db.collection("users").document(userID).updateData(["isOnline": true])
+                        
                         self.lblName.text = docSnepshot.data()!["name"] as? String
                         self.lblEmail.text = docSnepshot.data()!["email"] as? String
                     }
@@ -168,16 +170,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func signOutButtonTapped(_ sender: UIButton) {
-        
         if let value = UserDefaults.standard.string(forKey: "loginFrom") {
             if value == "google" {
                 GIDSignIn.sharedInstance.signOut()
             } else if value == "facebook" {
                 LoginManager().logOut()
             } else {
-                try? Auth.auth().signOut()
+                do {
+                    let userID = Auth.auth().currentUser?.uid
+                    try Auth.auth().signOut()
+                    self.db.collection("users").document(userID!).updateData(["isOnline": false])
+                    print("sign out")
+                } catch {
+                    print("sign in")
+                }
             }
         }
+        UserDefaults.standard.set("signout", forKey: "loginFrom")
         Switcher.updateRootVC(status: false)
     }
 
@@ -300,61 +309,125 @@ class ViewController: UIViewController {
         }
     }
     
-    func drawPath(from polyStr: String){
-        
-        let path = GMSPath(fromEncodedPath: polyStr)
-        let polyline = GMSPolyline(path: path)
-        polyline.strokeWidth = 5.0
-        polyline.map = mapView
-
-
-        let cameraUpdate = GMSCameraUpdate.fit(GMSCoordinateBounds(coordinate: CLLocationCoordinate2D(latitude: currentLatitude, longitude: currentLongitude), coordinate: CLLocationCoordinate2D(latitude: destinationLatitude, longitude: destinationLongitude)))
-        mapView.moveCamera(cameraUpdate)
-        let currentZoom = mapView.camera.zoom
-        mapView.animate(toZoom: currentZoom - 1.4)
-    }
+//    func drawPath(from polyStr: String){
+//
+//        let path = GMSPath(fromEncodedPath: polyStr)
+//        let polyline = GMSPolyline(path: path)
+//        polyline.strokeWidth = 5.0
+//        polyline.map = mapView
+//
+//
+//        let cameraUpdate = GMSCameraUpdate.fit(GMSCoordinateBounds(coordinate: CLLocationCoordinate2D(latitude: currentLatitude, longitude: currentLongitude), coordinate: CLLocationCoordinate2D(latitude: destinationLatitude, longitude: destinationLongitude)))
+//        mapView.moveCamera(cameraUpdate)
+//        let currentZoom = mapView.camera.zoom
+//        mapView.animate(toZoom: currentZoom - 1.4)
+//    }
     
+//    func getRoutes() {
+//        let origin = "\(sourceLatitude),\(sourecLongitude)"
+//        let destination = "\(destinationLatitude),\(destinationLongitude)"
+//
+//        let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyDuCz_PnycWVP2kZMgMwB5SSSc77iABQOM"
+//
+//        let url = URL(string: urlString)
+//
+//        URLSession.shared.dataTask(with: url!, completionHandler: {
+//            (data, response, error) in
+//
+//            if(error != nil){
+//                print("error")
+//            }else{
+//                do{
+//                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
+//                    let routes = json["routes"] as! NSArray
+//
+//                    DispatchQueue.main.async{
+//                        self.mapView.clear()
+//                        self.setMarkers()
+//                        for route in routes
+//                        {
+//                            let routeOverviewPolyline:NSDictionary = (route as! NSDictionary).value(forKey: "overview_polyline") as! NSDictionary
+//                            let points = routeOverviewPolyline.object(forKey: "points")
+//                            let path = GMSPath.init(fromEncodedPath: points! as! String)
+//                            let polyline = GMSPolyline.init(path: path)
+//                            polyline.strokeWidth = 3
+//
+//                            let bounds = GMSCoordinateBounds(path: path!)
+//                            self.mapView!.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 30.0))
+//
+//                            polyline.map = self.mapView
+//
+//                        }
+//                    }
+//                }catch let error as NSError{
+//                    print("error:\(error)")
+//                }
+//            }
+//        }).resume()
+//    }
+
     func getRoutes() {
         let origin = "\(sourceLatitude),\(sourecLongitude)"
         let destination = "\(destinationLatitude),\(destinationLongitude)"
         
-        let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyDuCz_PnycWVP2kZMgMwB5SSSc77iABQOM"
-
-        let url = URL(string: urlString)
-
-        URLSession.shared.dataTask(with: url!, completionHandler: {
-            (data, response, error) in
-
-            if(error != nil){
-                print("error")
-            }else{
-                do{
-                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
-                    let routes = json["routes"] as! NSArray
-
-                    DispatchQueue.main.async{
+        guard let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=AIzaSyDuCz_PnycWVP2kZMgMwB5SSSc77iABQOM".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error fetching routes: \(error)")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data returned")
+                return
+            }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: AnyObject],
+                   let routes = json["routes"] as? [[String: AnyObject]] {
+                    
+                    DispatchQueue.main.async {
                         self.mapView.clear()
                         self.setMarkers()
-                        for route in routes
-                        {
-                            let routeOverviewPolyline:NSDictionary = (route as! NSDictionary).value(forKey: "overview_polyline") as! NSDictionary
-                            let points = routeOverviewPolyline.object(forKey: "points")
-                            let path = GMSPath.init(fromEncodedPath: points! as! String)
-                            let polyline = GMSPolyline.init(path: path)
-                            polyline.strokeWidth = 3
-
-                            let bounds = GMSCoordinateBounds(path: path!)
-                            self.mapView!.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 30.0))
-
-                            polyline.map = self.mapView
-
+                        
+                        for route in routes {
+                            guard let legs = route["legs"] as? [[String: AnyObject]] else { continue }
+                            for leg in legs {
+                                guard let steps = leg["steps"] as? [[String: AnyObject]] else { continue }
+                                for step in steps {
+                                    guard let polyline = step["polyline"] as? [String: AnyObject],
+                                          let points = polyline["points"] as? String,
+                                          let path = GMSPath(fromEncodedPath: points) else { continue }
+                                    
+                                    let polylines = GMSPolyline(path: path)
+                                    polylines.strokeWidth = 3
+                                    polylines.strokeColor = .blue
+                                    polylines.map = self.mapView
+                                }
+                            }
+                        }
+                        
+                        // Adjust the camera to fit all the polylines
+                        if let firstRoute = routes.first,
+                           let overviewPolyline = firstRoute["overview_polyline"] as? [String: AnyObject],
+                           let overviewPoints = overviewPolyline["points"] as? String,
+                           let overviewPath = GMSPath(fromEncodedPath: overviewPoints) {
+                            let bounds = GMSCoordinateBounds(path: overviewPath)
+                            self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 30.0))
                         }
                     }
-                }catch let error as NSError{
-                    print("error:\(error)")
+                } else {
+                    print("Invalid JSON format")
                 }
+            } catch {
+                print("Error parsing JSON: \(error)")
             }
-        }).resume()
+        }.resume()
     }
 }
 
@@ -475,43 +548,44 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         drawerView.isHidden = true
         isDrawerShowing = false
-        if indexPath.row == 0 {
+        
+        if indexPath.row == 2 {
             let vc = storyboard?.instantiateViewController(withIdentifier: "SMSViewController") as! SMSViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 1 {
+        } else if indexPath.row == 4 {
             let vc = storyboard?.instantiateViewController(withIdentifier: "ShareDataViewController") as! ShareDataViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 3 {
             let vc = storyboard?.instantiateViewController(withIdentifier: "AnimationViewController") as! AnimationViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 1 {
             let vc = storyboard?.instantiateViewController(withIdentifier: "CustomViewController") as! CustomViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 5 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "AudioListViewController") as! AudioListViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 5 {
+        } else if indexPath.row == 6 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "VideoListViewController") as! VideoListViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 6 {
+        } else if indexPath.row == 7 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "DeviceResolutionViewController") as! DeviceResolutionViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 7 {
+        } else if indexPath.row == 8 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "AutoResizingViewController") as! AutoResizingViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 8 {
+        } else if indexPath.row == 10 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "LanguageViewController") as! LanguageViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 9 {
+        } else if indexPath.row == 11 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "ActionSheetViewController") as! ActionSheetViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 10 {
+        } else if indexPath.row == 12 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "PopoverViewController") as! PopoverViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 11 {
+        } else if indexPath.row == 14 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "PullToRefreshViewController") as! PullToRefreshViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 12 {
+        } else if indexPath.row == 9 {
             let vc = uiDemoStoryboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
             let uiDesignVC = uiDemoStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
             uiDesignVC.latitude = self.currentLatitude
@@ -520,17 +594,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.row == 13 {
             let vc = audioPlayerStoryboard.instantiateViewController(withIdentifier: "OrientationViewController") as! OrientationViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 14 {
+        } else if indexPath.row == 15 {
             let vc = week8Stroyboard.instantiateViewController(withIdentifier: "PaymentListViewController") as! PaymentListViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 15 {
+        } else if indexPath.row == 16 {
             let vc = week9Stroyboard.instantiateViewController(withIdentifier: "Week9TopicListViewController") as! Week9TopicListViewController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 16 {
+        } else if indexPath.row == 17 {
             let vc = week10Storyboard.instantiateViewController(withIdentifier: "Week10TopicListController") as! Week10TopicListController
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == 17 {
+        } else if indexPath.row == 0 {
             let vc = changesStoryboard.instantiateViewController(withIdentifier: "ChangesListViewController") as! ChangesListViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 18 {
+            let vc = week11Storyboard.instantiateViewController(withIdentifier: "Week11TopicListViewController") as! Week11TopicListViewController
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 19 {
+            let vc = chatDemoStoryboard.instantiateViewController(withIdentifier: "UserChatListViewController") as! UserChatListViewController
             navigationController?.pushViewController(vc, animated: true)
         }
     }

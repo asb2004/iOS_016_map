@@ -26,7 +26,9 @@ pod 'FirebaseCore'
 pod 'FirebaseFirestore'
 pod 'FirebaseDatabase'
 pod 'FirebaseStorage'
-pod 'FirebaseAnalytics', '7.0.0'
+pod 'FirebaseMessaging'
+pod 'FirebaseDynamicLinks'
+
 
   target 'iOS_016_mapTests' do
     inherit! :search_paths

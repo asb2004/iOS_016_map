@@ -66,6 +66,19 @@ class ExpandableTableViewCellViewController: UIViewController {
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        title = "Expandable Table View"
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
 
 }
 
@@ -107,7 +120,7 @@ extension ExpandableTableViewCellViewController: UITableViewDelegate, UITableVie
         //let cell = table.cellForRow(at: indexPath) as! ExpandableTableViewCell
         //faqData![indexPath.row - 1].isExpanded = !faqData![indexPath.row - 1].isExpanded
         faqData![indexPath.row - 1].isExpanded = true
-        //cell.expanded = true
+        //cell.expanded = true
         //self.table.reloadRows(at: [indexPath], with: .automatic)
         self.table.reloadData()
     }

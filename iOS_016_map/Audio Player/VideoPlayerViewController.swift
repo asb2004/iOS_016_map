@@ -39,10 +39,21 @@ class VideoPlayerViewController: UIViewController {
             view.addSubview(volumeView)
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+        
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             self?.updateSliderWithSystemVolume()
         }
         
+    }
+    
+    @objc func rotated() {
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+        } else {
+            print("Portrait")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,11 +127,12 @@ class VideoPlayerViewController: UIViewController {
         avPlayer = AVPlayer(url: videoFilesURL[index])
         playerLayer = AVPlayerLayer(player: avPlayer)
         playerLayer.frame = view.frame
-        if isFullScreen {
-            playerLayer.videoGravity = .resizeAspectFill
-        } else {
-            playerLayer.videoGravity = .resizeAspect
-        }
+//        if isFullScreen {
+//            playerLayer.videoGravity = .resizeAspectFill
+//        } else {
+//            playerLayer.videoGravity = .resizeAspect
+//        }
+        playerLayer.videoGravity = .resizeAspect
         videoPlayerLayer.layer.addSublayer(playerLayer)
         videoPlayerLayer.layoutIfNeeded()
         playerLayer.layoutIfNeeded()
@@ -275,6 +287,7 @@ class VideoPlayerViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
         avPlayer.pause()

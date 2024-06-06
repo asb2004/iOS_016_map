@@ -8,6 +8,7 @@
 import UIKit
 import AVKit
 import AVFoundation
+import Photos
 
 var videoFilesURL = [URL]()
 
@@ -26,31 +27,78 @@ class VideoListViewController: UIViewController {
         collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longpressOnCell)))
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addVideoFile))
+        
+        videoFilesURL.removeAll()
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .authorized:
+                self.loadAllVideos()
+            case .denied, .restricted, .notDetermined:
+                print("Permission denied")
+            @unknown default:
+                fatalError("Unknown authorization status")
+            }
+        }
+    }
+    
+    func loadAllVideos() {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.video.rawValue)
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let allVideos = PHAsset.fetchAssets(with: fetchOptions)
+            
+            allVideos.enumerateObjects { (asset, index, stop) in
+                self.getVideo(asset: asset)
+            }
+        }
+    }
+    
+    func getVideo(asset: PHAsset) {
+        let options = PHVideoRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = true
+        
+        PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { (avAsset, audioMix, info) in
+            if let urlAsset = avAsset as? AVURLAsset {
+                let localVideoUrl = urlAsset.url
+                
+                
+                videoFilesURL.append(localVideoUrl)
+                
+                print(localVideoUrl)
+                print(videoFilesURL.count)
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        videoFilesURL.removeAll()
+        //videoFilesURL.removeAll()
         
         navigationController?.isNavigationBarHidden = false
         title = "Video"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        var filePath = Bundle.main.paths(forResourcesOfType: "mp4", inDirectory: nil)
-
-        for path in filePath {
-            videoFilesURL.append(URL(string: "file://\(path)")!)
-        }
-        
-        filePath = Bundle.main.paths(forResourcesOfType: "mov", inDirectory: nil)
-
-        for path in filePath {
-            videoFilesURL.append(URL(string: "file://\(path)")!)
-        }
-        
-        documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        loadFiles()
+//        var filePath = Bundle.main.paths(forResourcesOfType: "mp4", inDirectory: nil)
+//
+//        for path in filePath {
+//            videoFilesURL.append(URL(string: "file://\(path)")!)
+//        }
+//
+//        filePath = Bundle.main.paths(forResourcesOfType: "mov", inDirectory: nil)
+//
+//        for path in filePath {
+//            videoFilesURL.append(URL(string: "file://\(path)")!)
+//        }
+//
+//        documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//        loadFiles()
     }
     
     func loadFiles() {

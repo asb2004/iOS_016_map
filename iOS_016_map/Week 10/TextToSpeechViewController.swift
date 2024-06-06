@@ -20,6 +20,13 @@ class TextToSpeechViewController: UIViewController {
 
         text.delegate = self
         synthesizer.delegate = self
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
     }
     
     @IBAction func speechButtonTapped(_ sender: UIButton) {
@@ -45,6 +52,14 @@ class TextToSpeechViewController: UIViewController {
                     self.speechButton.setTitle("Pause", for: .normal)
                 }
             }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.synthesizer.isSpeaking {
+            self.synthesizer.stopSpeaking(at: .immediate)
         }
     }
 }

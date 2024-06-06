@@ -13,18 +13,33 @@ class ShoppingCartViewController: UIViewController {
     @IBOutlet weak var orderButtonShadowView: UIView!
     @IBOutlet weak var cartTableView: UITableView!
     
+    let gradientLayer = CAGradientLayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
+        setUpControls()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(UIDevice.orientationDidChangeNotification)
+        
+    }
+    
+    @objc func orientationChanged() {
+        
+        gradientLayer.frame = view.frame
+        
     }
     
     func initialSetup() {
 
         // basic setup
         view.backgroundColor = .white
-
-        // Create a new gradient layer
-        let gradientLayer = CAGradientLayer()
+    
         // Set the colors and locations for the gradient layer
         gradientLayer.colors = [UIColor.white.cgColor, UIColor(named: "tabbar_btnback")!.cgColor]
         gradientLayer.locations = [0.0, 1.0]

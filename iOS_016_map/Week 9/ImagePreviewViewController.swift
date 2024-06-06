@@ -13,16 +13,20 @@ class ImagePreviewViewController: UIViewController {
 
     var selectedIndex = 0
     
+    var index: Int! {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.scrollToItem(at: IndexPath(item: self.index, section: 0), at: .right, animated: true)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView.collectionViewLayout = ImagePreviewCollectionFlow()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        collectionView.scrollToItem(at: IndexPath(item: selectedIndex, section: 0), at: .right, animated: true)
+        index = selectedIndex
     }
 
 }

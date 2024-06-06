@@ -42,7 +42,7 @@ class PDFCreator: NSObject {
             
             let titleBottom = addTitle(pageRect: pageRect)
             let imageBottom = addImage(pageRect: pageRect, imageTop: titleBottom)
-            let bodyBottom = addBodyText(pageRect: pageRect, textTop: imageBottom)
+            addBodyText(pageRect: pageRect, textTop: imageBottom)
             
         }
 
@@ -50,29 +50,74 @@ class PDFCreator: NSObject {
         
     }
     
+//    func addTitle(pageRect: CGRect) -> CGFloat {
+//
+//        let titleFont = UIFont.systemFont(ofSize: 30.0, weight: .bold)
+//
+//        let titleAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: titleFont]
+//
+//        let attributedTitle = NSAttributedString(
+//                string: title,
+//                attributes: titleAttributes
+//            )
+//
+//        let titleStringSize = attributedTitle.size()
+//
+//        let titleStringRect = CGRect(
+//                x: (pageRect.width - titleStringSize.width) / 2.0,
+//                y: 40,
+//                width: titleStringSize.width,
+//                height: titleStringSize.height
+//            )
+//
+//        attributedTitle.draw(in: titleStringRect)
+//
+//        return titleStringRect.origin.y + titleStringRect.size.height
+//    }
+    
     func addTitle(pageRect: CGRect) -> CGFloat {
-        
         let titleFont = UIFont.systemFont(ofSize: 30.0, weight: .bold)
         
-        let titleAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: titleFont]
-       
+        // Define the maximum width for the title block
+        let maxTitleWidth = pageRect.width - 40.0 // Assuming 20pt margins on each side
+        
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: titleFont
+        ]
+        
         let attributedTitle = NSAttributedString(
-                string: title,
-                attributes: titleAttributes
-            )
-       
-        let titleStringSize = attributedTitle.size()
+            string: title,
+            attributes: titleAttributes
+        )
         
-        let titleStringRect = CGRect(
-                x: (pageRect.width - titleStringSize.width) / 2.0,
-                y: 40,
-                width: titleStringSize.width,
-                height: titleStringSize.height
-            )
+        // Define a bounding rect for the title text
+        let titleBoundingRect = CGRect(
+            x: 20.0, // Left margin
+            y: 40.0, // Top margin
+            width: maxTitleWidth,
+            height: CGFloat.greatestFiniteMagnitude
+        )
         
-        attributedTitle.draw(in: titleStringRect)
+        // Calculate the size required to draw the title within the bounding rect
+        let titleStringRect = attributedTitle.boundingRect(
+            with: titleBoundingRect.size,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            context: nil
+        )
         
-        return titleStringRect.origin.y + titleStringRect.size.height
+        // Center the title horizontally within the page
+        let centeredTitleRect = CGRect(
+            x: (pageRect.width - titleStringRect.width) / 2.0,
+            y: titleBoundingRect.origin.y,
+            width: titleStringRect.width,
+            height: titleStringRect.height
+        )
+        
+        // Draw the title
+        attributedTitle.draw(in: centeredTitleRect)
+        
+        // Return the bottom Y coordinate of the title
+        return centeredTitleRect.origin.y + centeredTitleRect.size.height
     }
     
     func addBodyText(pageRect: CGRect, textTop: CGFloat) {

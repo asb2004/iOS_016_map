@@ -26,6 +26,7 @@ class GoogleSignViewController: UIViewController {
     @IBOutlet weak var appleButtonView: UIView!
     @IBOutlet weak var googleButtonView: GIDSignInButton!
     @IBOutlet weak var facebookLoginView: UIView!
+    @IBOutlet weak var loader: UIActivityIndicatorView!
     
     var isPassShowing = false
     
@@ -54,10 +55,10 @@ class GoogleSignViewController: UIViewController {
         googleButtonView.style = .standard
         googleButtonView.frame = googleButtonView.bounds
         
-        let appleLoginButton = ASAuthorizationAppleIDButton()
-        appleLoginButton.addTarget(self, action: #selector(appleLoginTapped), for: .touchUpInside)
-        appleLoginButton.frame = appleButtonView.bounds
-        appleButtonView.addSubview(appleLoginButton)
+//        let appleLoginButton = ASAuthorizationAppleIDButton()
+//        appleLoginButton.addTarget(self, action: #selector(appleLoginTapped), for: .touchUpInside)
+//        appleLoginButton.frame = appleButtonView.bounds
+//        appleButtonView.addSubview(appleLoginButton)
     }
     
     private func setUpControls() {
@@ -111,8 +112,11 @@ class GoogleSignViewController: UIViewController {
                 return
             }
             
+            self.loader.isHidden = false
+            
             FirebaseAuth.Auth.auth().signIn(withEmail: emailTxt, password: passTxt) { result, err in
                 if let _ = err {
+                    self.loader.isHidden = true
                     self.showAlert(with: "provided credential are not valid. try again with valid credential!")
                     return
                 }
@@ -123,6 +127,7 @@ class GoogleSignViewController: UIViewController {
                     
                     UserDefaults.standard.set("firebase", forKey: "loginFrom")
 
+                    self.loader.isHidden = true
                     Switcher.updateRootVC(status: true)
                 }
             }
@@ -149,6 +154,7 @@ class GoogleSignViewController: UIViewController {
 //        }
         
     
+        loader.isHidden = false
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
@@ -164,6 +170,7 @@ class GoogleSignViewController: UIViewController {
 
             Auth.auth().signIn(with: credential) { result, err in
                 if let err = err {
+                    self.loader.isHidden = true
                     self.showAlert(with: err.localizedDescription)
                 }
                 if let result = result {
@@ -171,11 +178,14 @@ class GoogleSignViewController: UIViewController {
                     let db = Firestore.firestore()
                     db.collection("users").document(result.user.uid).setData([
                         "name" : user.profile!.name as String,
-                        "email" : result.user.email! as String
+                        "email" : result.user.email! as String,
+                        "profile" : "",
+                        "uid" : result.user.uid
                     ])
                     
                     UserDefaults.standard.set("firebase", forKey: "loginFrom")
 
+                    self.loader.isHidden = true
                     Switcher.updateRootVC(status: true)
                 }
 
@@ -198,7 +208,7 @@ class GoogleSignViewController: UIViewController {
 //        authorizationController.presentationContextProvider = self
 //        authorizationController.performRequests()
         
-        
+        self.loader.isHidden = false
         let nonce = randomNonceString()
         currentNonce = nonce
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -255,7 +265,6 @@ extension GoogleSignViewController: LoginButtonDelegate {
             }
             UserDefaults.standard.set("facebook", forKey: "loginFrom")
             Switcher.updateRootVC(status: true)
-            //getUserData()
             
         }
     }
@@ -274,6 +283,7 @@ extension GoogleSignViewController: ASAuthorizationControllerDelegate, ASAuthori
     
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        self.loader.isHidden = true
         print(error)
     }
     
@@ -315,17 +325,18 @@ extension GoogleSignViewController: ASAuthorizationControllerDelegate, ASAuthori
                 }
                 
                 if let result = result {
-                    print(result.user.email!)
-                    print(appleIDCredential.fullName?.givenName!)
                     
                     let db = Firestore.firestore()
                     db.collection("users").document(result.user.uid).setData([
-                        "name" : appleIDCredential.email!,
-                        "email" : appleIDCredential.fullName!
+                        "name" : appleIDCredential.fullName?.givenName!,
+                        "email" : appleIDCredential.email!,
+                        "profile" : "",
+                        "uid" : result.user.uid
                     ])
                     
                     UserDefaults.standard.set("firebase", forKey: "loginFrom")
 
+                    self.loader.isHidden = true
                     Switcher.updateRootVC(status: true)
                 }
             }

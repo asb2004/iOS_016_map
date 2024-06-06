@@ -13,6 +13,8 @@ class ProductListViewController: UIViewController {
     @IBOutlet weak var productListCollection: UICollectionView!
     @IBOutlet weak var categoryCollecitonView: UICollectionView!
     
+    let gradientLayer = CAGradientLayer()
+    
     var categoryImageList = [
         UIImage(named: "all")!,
         UIImage(named: "clothings")!,
@@ -35,6 +37,8 @@ class ProductListViewController: UIViewController {
         categoryCollecitonView.collectionViewLayout = CategoryCollectionFlow()
         productListCollection.collectionViewLayout = ProductListCollectionFlow()
         initialSetup()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,11 +47,14 @@ class ProductListViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
     func initialSetup() {
 
         view.backgroundColor = .white
-
-        let gradientLayer = CAGradientLayer()
+        
         gradientLayer.colors = [UIColor.white.cgColor, UIColor(named: "tabbar_btnback")!.cgColor]
         gradientLayer.locations = [0.0, 1.0]
 
@@ -56,6 +63,10 @@ class ProductListViewController: UIViewController {
         gradientLayer.frame = view.frame
         
         view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    @objc func orientationChanged() {
+        gradientLayer.frame = view.frame
     }
 
     @IBAction func backButtonTapped(_ sender: UIButton) {

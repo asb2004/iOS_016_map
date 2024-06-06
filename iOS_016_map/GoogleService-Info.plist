@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>734298926859-hjocmbr73l7fod8q2kt79c45e2e512k9.apps.googleusercontent.com</string>
+	<string>631970002050-mrdm5bvq974jkps9rkqqoqcg71stklrc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.734298926859-hjocmbr73l7fod8q2kt79c45e2e512k9</string>
+	<string>com.googleusercontent.apps.631970002050-mrdm5bvq974jkps9rkqqoqcg71stklrc</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCDVvxCat6lpZX_TTqclS6c7oYdiPC7WM8</string>
+	<string>AIzaSyDwB4HZTi8DR8CvPuA7_T0Vc5ziyGXJfAU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>734298926859</string>
+	<string>631970002050</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.app.kardder</string>
+	<string>com.medlegalconnect</string>
 	<key>PROJECT_ID</key>
-	<string>fir-825fa</string>
+	<string>fir-demo-b8a21</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fir-825fa.appspot.com</string>
+	<string>fir-demo-b8a21.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:734298926859:ios:d683db5eef8ef943733c0e</string>
+	<string>1:631970002050:ios:ceffbf940a85a6003df09b</string>
 	<key>DATABASE_URL</key>
-	<string>https://fir-825fa-default-rtdb.firebaseio.com</string>
+	<string>https://fir-demo-b8a21-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

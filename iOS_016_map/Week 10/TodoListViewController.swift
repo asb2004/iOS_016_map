@@ -49,6 +49,7 @@ struct Task: Codable {
 
 class TodoListViewController: UIViewController {
 
+    @IBOutlet weak var noTaskLabel: UILabel!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     
@@ -81,6 +82,11 @@ class TodoListViewController: UIViewController {
                 }
                 self.loader.isHidden = true
                 self.tableView.reloadData()
+                if todosList.isEmpty {
+                    noTaskLabel.isHidden = false
+                } else {
+                    noTaskLabel.isHidden = true
+                }
             }
         }
     }
@@ -137,6 +143,12 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 self.todosList.remove(at: indexPath.row)
                 self.tableView.reloadData()
+                
+                if self.todosList.isEmpty {
+                    self.noTaskLabel.isHidden = false
+                } else {
+                    self.noTaskLabel.isHidden = true
+                }
             }
         }
         

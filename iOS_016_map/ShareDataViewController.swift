@@ -62,7 +62,7 @@ class ShareDataViewController: UIViewController {
             return
         }
 
-        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [image, txtMessage.text], applicationActivities: nil)
 
         // If you want to exclude certain sharing options, you can specify them here
         activityViewController.excludedActivityTypes = [

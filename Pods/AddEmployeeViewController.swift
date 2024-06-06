@@ -32,6 +32,8 @@ class AddEmployeeViewController: UIViewController {
     var employee: Employee!
     var forUpdate = false
     
+    var gender = ["Male", "Female", "Other"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +52,12 @@ class AddEmployeeViewController: UIViewController {
         
         self.employeeImage.layer.cornerRadius = self.employeeImage.bounds.height / 2
         self.employeeImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(employeeImageTapped)))
+        
+        empGenderText.text = "Select"
+        let genderPicker = UIPickerView()
+        genderPicker.delegate = self
+        genderPicker.dataSource = self
+        self.empGenderText.inputView = genderPicker
         
     }
     
@@ -224,6 +232,26 @@ class AddEmployeeViewController: UIViewController {
             
         }
     }
+}
+
+extension AddEmployeeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return gender.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return gender[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.empGenderText.text = gender[row]
+        self.view.endEditing(true)
+    }
+    
 }
 
 extension AddEmployeeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

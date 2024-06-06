@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="488" id="KGk-i7-Jjw" customClass="MediaSenderCell" customModule="iOS_016_map" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="574" height="488"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="574" height="488"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aWb-s6-fnh">
+                        <rect key="frame" x="282" y="0.0" width="287" height="483"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crop_top" translatesAutoresizingMaskIntoConstraints="NO" id="n0q-8v-SY3">
+                                <rect key="frame" x="5" y="5" width="277" height="332.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="n0q-8v-SY3" secondAttribute="height" multiplier="1:1.2" id="m4E-4g-jrC"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:12 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aR-vB-ZTW">
+                                <rect key="frame" x="238.5" y="342.5" width="43.5" height="135.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vsA-gb-Ckw">
+                                <rect key="frame" x="118.5" y="146.5" width="50" height="49"/>
+                                <color key="tintColor" name="chat-demo"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="O3m-hg-2l3"/>
+                                    <constraint firstAttribute="width" constant="50" id="OnY-KZ-CX7"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="sender"/>
+                        <constraints>
+                            <constraint firstItem="vsA-gb-Ckw" firstAttribute="centerY" secondItem="n0q-8v-SY3" secondAttribute="centerY" id="3eo-7E-Vec"/>
+                            <constraint firstAttribute="trailing" secondItem="9aR-vB-ZTW" secondAttribute="trailing" constant="5" id="5eg-K7-r67"/>
+                            <constraint firstItem="n0q-8v-SY3" firstAttribute="top" secondItem="aWb-s6-fnh" secondAttribute="top" constant="5" id="Cvt-Fd-iVn"/>
+                            <constraint firstItem="n0q-8v-SY3" firstAttribute="leading" secondItem="aWb-s6-fnh" secondAttribute="leading" constant="5" id="FJj-1i-heq"/>
+                            <constraint firstAttribute="trailing" secondItem="n0q-8v-SY3" secondAttribute="trailing" constant="5" id="gg5-2P-h77"/>
+                            <constraint firstItem="vsA-gb-Ckw" firstAttribute="centerX" secondItem="n0q-8v-SY3" secondAttribute="centerX" id="hHK-4i-jEG"/>
+                            <constraint firstAttribute="bottom" secondItem="9aR-vB-ZTW" secondAttribute="bottom" constant="5" id="hLJ-Ow-knw"/>
+                            <constraint firstItem="9aR-vB-ZTW" firstAttribute="top" secondItem="n0q-8v-SY3" secondAttribute="bottom" constant="5" id="iNx-8H-Rw6"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aWb-s6-fnh" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.5" id="Akc-0O-BfL"/>
+                    <constraint firstAttribute="trailing" secondItem="aWb-s6-fnh" secondAttribute="trailing" constant="5" id="EbM-VO-LfC"/>
+                    <constraint firstAttribute="bottom" secondItem="aWb-s6-fnh" secondAttribute="bottom" constant="5" id="Vut-hr-x8j"/>
+                    <constraint firstItem="aWb-s6-fnh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="caA-lU-UlI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="backView" destination="aWb-s6-fnh" id="QvU-M9-8eF"/>
+                <outlet property="mediaImage" destination="n0q-8v-SY3" id="MRL-Ps-e9d"/>
+                <outlet property="playButton" destination="vsA-gb-Ckw" id="Ska-AH-wcL"/>
+                <outlet property="timeLbl" destination="9aR-vB-ZTW" id="Pse-Xq-C8O"/>
+            </connections>
+            <point key="canvasLocation" x="176.81159420289856" y="105.13392857142857"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="crop_top" width="164" height="210"/>
+        <image name="play.circle.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="chat-demo">
+            <color red="0.11699999868869781" green="0.43900001049041748" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="sender">
+            <color red="0.11699999868869781" green="0.43900001049041748" blue="0.5" alpha="0.50599998235702515" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -119,6 +119,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FirebaseDynamicLinks-FirebaseDynamicLinks_Privacy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseDynamicLinks.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FirebaseFirestore-FirebaseFirestore_Privacy.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -135,6 +145,26 @@
 			<false/>
 		</dict>
 		<key>FirebaseFirestoreInternal.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseInstallations-FirebaseInstallations_Privacy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseInstallations.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseMessaging-FirebaseMessaging_Privacy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseMessaging.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -160,6 +190,16 @@
 			<false/>
 		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleDataTransport-GoogleDataTransport_Privacy.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleDataTransport.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

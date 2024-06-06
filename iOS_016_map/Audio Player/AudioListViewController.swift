@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MediaPlayer
 
 var audioFilesList = [URL]()
 
@@ -37,7 +38,23 @@ class AudioListViewController: UIViewController {
     @objc func addAudioFile() {
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.mp3])
         documentPicker.delegate = self
-        self.present(documentPicker, animated: true, completion: nil)
+        //self.present(documentPicker, animated: true, completion: nil)
+        
+        MPMediaLibrary.requestAuthorization { status in
+            switch status {
+            case .authorized:
+                let mediaItems = MPMediaQuery.songs().items
+                print(mediaItems)
+            case .restricted:
+                print("Access to media library is restricted")
+            case .denied:
+                print("Access to media library is denied")
+            case .notDetermined:
+                print("Authorization status not determined")
+            @unknown default:
+                fatalError("Unknown authorization status")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
